@@ -1,0 +1,21 @@
+{
+	"appearance": "Внешний вид",
+	"language": "Язык",
+	"theme": "Тема",
+	"other": "Другое",
+	"group": "Группа",
+	"systemTheme": "Системная",
+	"lightTheme": "Светлая",
+	"darkTheme": "Темная",
+	"lecture": "Лекция",
+	"practice": "Практика",
+	"lab": "Лабораторная",
+	"schedule": "Расписание",
+	"retakes": "Пересдачи",
+	"settings": "Настройки",
+	"week": "Неделя",
+	"even": "Четная",
+	"odd": "Нечетная",
+	"cancel": "Отменить",
+	"ok": "Ок"
+}

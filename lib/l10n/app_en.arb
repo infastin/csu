@@ -1,0 +1,21 @@
+{
+	"appearance": "Appearance",
+	"language": "Language",
+	"theme": "Theme",
+	"other": "Other",
+	"group": "Group",
+	"systemTheme": "System",
+	"lightTheme": "Light",
+	"darkTheme": "Dark",
+	"lecture": "Lecture",
+	"practice": "Pratice",
+	"lab": "Lab",
+	"schedule": "Schedule",
+	"retakes": "Retakes",
+	"settings": "Settings",
+	"week": "Week",
+	"even": "Even",
+	"odd": "Odd",
+	"cancel": "Cancel",
+	"ok": "OK"
+}
