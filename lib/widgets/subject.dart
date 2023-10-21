@@ -51,7 +51,6 @@ class SubjectWidget extends StatelessWidget {
               style: textTheme.labelMedium?.copyWith(
                 color: colorScheme.onSurface.withOpacity(0.7),
               ),
-
             ),
           ],
         ),

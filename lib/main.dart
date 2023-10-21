@@ -75,14 +75,14 @@ final _router = GoRouter(
           path: "/retakes",
           pageBuilder: (context, state) => MaterialPage(
             key: state.pageKey,
-            child: PageScaffold(state: state, child: ScheduleView()),
+            child: PageScaffold(state: state, child: RetakesView()),
           ),
         ),
         GoRoute(
           path: "/settings",
           pageBuilder: (context, state) => MaterialPage(
             key: state.pageKey,
-            child: PageScaffold(state: state, child: SettingsView()),
+            child: PageScaffold(state: state, child: const SettingsView()),
           ),
         ),
       ]

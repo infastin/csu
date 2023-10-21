@@ -7,7 +7,8 @@ class RetakeEntity {
     required this.room,
     required this.lecturer,
     required this.number,
-    required this.timeRange
+    required this.timeRange,
+    required this.date,
   });
 
   final String name;
@@ -15,4 +16,5 @@ class RetakeEntity {
   final LecturerEntity lecturer;
   final int number;
   final TimeRange timeRange;
+  final DateTime date;
 }

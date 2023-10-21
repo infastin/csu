@@ -1,12 +1,14 @@
-import 'package:csu/entity/day.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:intl/intl.dart';
 
 import '../entity/entity.dart';
 import '../widgets/widgets.dart';
+import '../repo/repo.dart';
+import '../utils/utils.dart';
 
 class DayWidget extends StatelessWidget {
-  DayWidget({
+  const DayWidget({
     super.key,
     required this.day,
     required this.startDate,
@@ -14,13 +16,14 @@ class DayWidget extends StatelessWidget {
 
   final DayEntity day;
   final DateTime startDate;
-  final DateFormat _dateFormat = DateFormat("EEEE, d MMM y");
 
   @override
   Widget build(BuildContext context) {
     var theme = Theme.of(context);
     var textTheme = theme.textTheme;
     var date = startDate.add(Duration(days: day.weekday));
+    var prefProvider = Provider.of<PreferencesProvider>(context);
+    var dateFormat = DateFormat("EEEE, d MMM y", prefProvider.locale.toString());
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -28,7 +31,7 @@ class DayWidget extends StatelessWidget {
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
           child: Text(
-            _dateFormat.format(date),
+            dateFormat.format(date).capitalize(),
             style: textTheme.titleMedium,
           )
         ),

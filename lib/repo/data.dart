@@ -28,6 +28,26 @@ const List<LecturerEntity> lecturers = [
     lastName: "Савченко",
     middleName: "Викторович",
   ),
+  LecturerEntity(
+    firstName: "Михаил",
+    lastName: "Лепчинский",
+    middleName: "Германович",
+  ),
+  LecturerEntity(
+    firstName: "Александр",
+    lastName: "Панов",
+    middleName: "Васильевич",
+  ),
+  LecturerEntity(
+    firstName: "Леонид",
+    lastName: "Шалагинов",
+    middleName: "Викторович",
+  ),
+  LecturerEntity(
+    firstName: "Вера",
+    lastName: "Кораблева",
+    middleName: "Владимировна",
+  ),
 ];
 
 const List<TimeRange> timeRanges = [
@@ -230,5 +250,48 @@ final List<DayEntity> oddDays = [
         timeRange: timeRanges[2]
       ),
     ]
+  ),
+];
+
+final List<RetakeEntity> retakes = [
+  RetakeEntity(
+    name: "Методы программирования",
+    room: "Discord;https://discord.gg/2qbGgN6v2T",
+    lecturer: lecturers[5],
+    number: 5,
+    timeRange: timeRanges[4],
+    date: DateTime(2023, 9, 23),
+  ),
+  RetakeEntity(
+    name: "Теория вероятностей и математическая статистика",
+    room: "A-15",
+    lecturer: lecturers[6],
+    number: 1,
+    timeRange: timeRanges[0],
+    date: DateTime(2023, 10, 3),
+  ),
+  RetakeEntity(
+    name: "Дискретная математика",
+    room: "421",
+    lecturer: lecturers[7],
+    number: 3,
+    timeRange: timeRanges[2],
+    date: DateTime(2023, 10, 9),
+  ),
+  RetakeEntity(
+    name: "Теория вероятностей и математическая статистика",
+    room: "441а",
+    lecturer: lecturers[6],
+    number: 1,
+    timeRange: timeRanges[0],
+    date: DateTime(2023, 10, 23),
+  ),
+  RetakeEntity(
+    name: "Теоретико-числовые методы в криптографии",
+    room: "412",
+    lecturer: lecturers[8],
+    number: 2,
+    timeRange: timeRanges[1],
+    date: DateTime(2023, 11, 03),
   ),
 ];

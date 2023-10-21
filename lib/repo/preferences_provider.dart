@@ -1,6 +1,7 @@
-import 'package:csu/repo/preferences.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
+import 'preferences.dart';
 
 class PreferencesProvider extends ChangeNotifier {
   PreferencesProvider({

@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-import '../widgets/widgets.dart' as widgets;
+import '../widgets/widgets.dart';
 import '../repo/data.dart' as data;
-import '../utils/utils.dart' as utils;
+import '../utils/utils.dart';
 
 class ScheduleView extends StatefulWidget {
   ScheduleView({super.key});
@@ -15,7 +15,7 @@ class ScheduleView extends StatefulWidget {
 }
 
 class _ScheduleViewState extends State<ScheduleView> {
-  int _selectedWeek = utils.isoWeekNumber(DateTime.now()).isOdd ? 0 : 1;
+  int _selectedWeek = isoWeekNumber(DateTime.now()).isOdd ? 0 : 1;
 
   @override
   Widget build(BuildContext context) {
@@ -26,8 +26,8 @@ class _ScheduleViewState extends State<ScheduleView> {
     var loc = AppLocalizations.of(context)!;
 
     return ListView.builder(
-      itemCount: data.evenDays.length + 1,
-      itemBuilder: (BuildContext context, int index) {
+      itemCount: days.length + 1,
+      itemBuilder: (context, index) {
         if (index == 0) {
           var labels = [loc.odd, loc.even];
 
@@ -56,7 +56,7 @@ class _ScheduleViewState extends State<ScheduleView> {
         }
 
         var now = DateTime.now();
-        var realWeek = utils.isoWeekNumber(now).isOdd ? 0 : 1;
+        var realWeek = isoWeekNumber(now).isOdd ? 0 : 1;
 
         var startDate = now.subtract(Duration(days: now.weekday));
         if (realWeek != _selectedWeek) {
@@ -65,7 +65,7 @@ class _ScheduleViewState extends State<ScheduleView> {
 
         return Padding(
           padding: const EdgeInsets.all(8),
-          child: widgets.DayWidget(day: days[index-1], startDate: startDate)
+          child: DayWidget(day: days[index-1], startDate: startDate)
         );
       },
     );
