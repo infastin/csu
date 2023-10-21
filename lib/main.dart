@@ -1,4 +1,3 @@
-import 'package:csu/repo/preferences_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:adaptive_theme/adaptive_theme.dart';
@@ -93,6 +92,7 @@ final _router = GoRouter(
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await SystemTheme.accentColor.load();
   final savedThemeMode = await AdaptiveTheme.getThemeMode();
   final savedLocale = await Preferences.getLocale();
   final savedGroup = await Preferences.getGroup();
