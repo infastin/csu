@@ -25,6 +25,14 @@ class DayWidget extends StatelessWidget {
     var prefProvider = Provider.of<PreferencesProvider>(context);
     var dateFormat = DateFormat("EEEE, d MMM y", prefProvider.locale.toString());
 
+    var dateTheme = textTheme.titleMedium;
+    if (DateTime.now().dateOnly() == date.dateOnly()) {
+      dateTheme = dateTheme?.copyWith(
+        color: theme.colorScheme.primary,
+        fontWeight: FontWeight.bold,
+      );
+    }
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -32,7 +40,7 @@ class DayWidget extends StatelessWidget {
           padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
           child: Text(
             dateFormat.format(date).capitalize(),
-            style: textTheme.titleMedium,
+            style: dateTheme,
           )
         ),
         Card(

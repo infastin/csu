@@ -1,15 +1,23 @@
-int dayOfYear(DateTime date) {
-  return date.difference(DateTime(date.year, 1, 1)).inDays;
-}
+import 'package:flutter/material.dart';
 
-int isoWeekNumber(DateTime date) {
-  int daysToAdd = DateTime.thursday - date.weekday;
+extension DateTimeExtension on DateTime {
+  int get dayOfYear {
+    return difference(DateTime(year)).inDays;
+  }
 
-  DateTime thursdayDate = daysToAdd > 0
-      ? date.add(Duration(days: daysToAdd))
-      : date.subtract(Duration(days: daysToAdd.abs()));
+  int get isoWeekNumber {
+    int daysToAdd = DateTime.thursday - weekday;
 
-  int dayOfYearThursday = dayOfYear(thursdayDate);
+    DateTime thursdayDate = daysToAdd > 0
+        ? add(Duration(days: daysToAdd))
+        : subtract(Duration(days: daysToAdd.abs()));
 
-  return 1 + ((dayOfYearThursday - 1) ~/ 7);
+    int dayOfYearThursday = thursdayDate.dayOfYear;
+
+    return 1 + ((dayOfYearThursday - 1) ~/ 7);
+  }
+
+  DateTime dateOnly() {
+    return DateUtils.dateOnly(this);
+  }
 }

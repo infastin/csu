@@ -35,6 +35,14 @@ class RetakeWidget extends StatelessWidget {
       room = parts[0];
     }
 
+    var dateTheme = textTheme.titleMedium;
+    if (DateTime.now().dateOnly() == retake.date.dateOnly()) {
+      dateTheme = dateTheme?.copyWith(
+        color: theme.colorScheme.primary,
+        fontWeight: FontWeight.bold,
+      );
+    }
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -42,7 +50,7 @@ class RetakeWidget extends StatelessWidget {
           padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
           child: Text(
             dateFormat.format(retake.date).capitalize(),
-            style: textTheme.titleMedium,
+            style: dateTheme,
           )
         ),
         Card(

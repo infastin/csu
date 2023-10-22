@@ -16,6 +16,7 @@
 	"week": "Week",
 	"even": "Even",
 	"odd": "Odd",
+  "current": "Current",
 	"cancel": "Cancel",
 	"ok": "OK"
 }

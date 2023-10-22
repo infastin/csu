@@ -15,7 +15,7 @@ class ScheduleView extends StatefulWidget {
 }
 
 class _ScheduleViewState extends State<ScheduleView> {
-  int _selectedWeek = isoWeekNumber(DateTime.now()).isOdd ? 0 : 1;
+  int _selectedWeek = DateTime.now().isoWeekNumber.isOdd ? 0 : 1;
 
   @override
   Widget build(BuildContext context) {
@@ -28,8 +28,12 @@ class _ScheduleViewState extends State<ScheduleView> {
     return ListView.builder(
       itemCount: days.length + 1,
       itemBuilder: (context, index) {
+        var now = DateTime.now();
+        var realWeek = now.isoWeekNumber.isOdd ? 0 : 1;
+
         if (index == 0) {
           var labels = [loc.odd, loc.even];
+          labels[realWeek] += " (${loc.current})";
 
           return Padding(
             padding: const EdgeInsets.only(left: 16, right: 16, bottom: 8),
@@ -54,9 +58,6 @@ class _ScheduleViewState extends State<ScheduleView> {
             )
           );
         }
-
-        var now = DateTime.now();
-        var realWeek = isoWeekNumber(now).isOdd ? 0 : 1;
 
         var startDate = now.subtract(Duration(days: now.weekday));
         if (realWeek != _selectedWeek) {
