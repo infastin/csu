@@ -60,9 +60,10 @@ class RetakeWidget extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  crossAxisAlignment: CrossAxisAlignment.center,
+                Wrap(
+                  direction: Axis.horizontal,
+                  alignment: WrapAlignment.start,
+                  crossAxisAlignment: WrapCrossAlignment.center,
                   children: [
                     Text(
                       "#${retake.number}",
