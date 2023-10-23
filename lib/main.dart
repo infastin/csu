@@ -34,7 +34,7 @@ var _routes = <_Route>[
   _Route(
     localize: (loc) => loc.retakes,
     location: "/retakes",
-    icon: const Icon(Icons.accessible_forward_outlined),
+    icon: const Icon(Icons.accessible_forward),
     selectedIcon:const Icon(Icons.accessible_forward),
   ),
   _Route(
