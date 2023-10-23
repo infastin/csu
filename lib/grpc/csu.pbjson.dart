@@ -128,3 +128,48 @@ final $typed_data.Uint8List scheduleResponseDescriptor = $convert.base64Decode(
     'ChBTY2hlZHVsZVJlc3BvbnNlEiIKB29kZFdlZWsYASADKAsyCC5jc3UuRGF5UgdvZGRXZWVrEi'
     'QKCGV2ZW5XZWVrGAIgAygLMgguY3N1LkRheVIIZXZlbldlZWs=');
 
+@$core.Deprecated('Use retakeDescriptor instead')
+const Retake$json = {
+  '1': 'Retake',
+  '2': [
+    {'1': 'name', '3': 1, '4': 1, '5': 9, '10': 'name'},
+    {'1': 'room', '3': 2, '4': 1, '5': 9, '10': 'room'},
+    {'1': 'lecturer', '3': 3, '4': 1, '5': 11, '6': '.csu.Lecturer', '10': 'lecturer'},
+    {'1': 'number', '3': 4, '4': 1, '5': 5, '10': 'number'},
+    {'1': 'timeRange', '3': 5, '4': 1, '5': 11, '6': '.csu.TimeRange', '10': 'timeRange'},
+    {'1': 'date', '3': 6, '4': 1, '5': 11, '6': '.google.protobuf.Timestamp', '10': 'date'},
+  ],
+};
+
+/// Descriptor for `Retake`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List retakeDescriptor = $convert.base64Decode(
+    'CgZSZXRha2USEgoEbmFtZRgBIAEoCVIEbmFtZRISCgRyb29tGAIgASgJUgRyb29tEikKCGxlY3'
+    'R1cmVyGAMgASgLMg0uY3N1LkxlY3R1cmVyUghsZWN0dXJlchIWCgZudW1iZXIYBCABKAVSBm51'
+    'bWJlchIsCgl0aW1lUmFuZ2UYBSABKAsyDi5jc3UuVGltZVJhbmdlUgl0aW1lUmFuZ2USLgoEZG'
+    'F0ZRgGIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXBSBGRhdGU=');
+
+@$core.Deprecated('Use retakesRequestDescriptor instead')
+const RetakesRequest$json = {
+  '1': 'RetakesRequest',
+  '2': [
+    {'1': 'group', '3': 1, '4': 1, '5': 9, '10': 'group'},
+  ],
+};
+
+/// Descriptor for `RetakesRequest`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List retakesRequestDescriptor = $convert.base64Decode(
+    'Cg5SZXRha2VzUmVxdWVzdBIUCgVncm91cBgBIAEoCVIFZ3JvdXA=');
+
+@$core.Deprecated('Use retakesResponseDescriptor instead')
+const RetakesResponse$json = {
+  '1': 'RetakesResponse',
+  '2': [
+    {'1': 'retakes', '3': 1, '4': 3, '5': 11, '6': '.csu.Retake', '10': 'retakes'},
+  ],
+};
+
+/// Descriptor for `RetakesResponse`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List retakesResponseDescriptor = $convert.base64Decode(
+    'Cg9SZXRha2VzUmVzcG9uc2USJQoHcmV0YWtlcxgBIAMoCzILLmNzdS5SZXRha2VSB3JldGFrZX'
+    'M=');
+

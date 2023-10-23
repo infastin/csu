@@ -14,6 +14,7 @@ import 'dart:core' as $core;
 import 'package:protobuf/protobuf.dart' as $pb;
 
 import 'csu.pbenum.dart';
+import 'google/protobuf/timestamp.pb.dart' as $1;
 
 export 'csu.pbenum.dart';
 
@@ -509,6 +510,226 @@ class ScheduleResponse extends $pb.GeneratedMessage {
 
   @$pb.TagNumber(2)
   $core.List<Day> get evenWeek => $_getList(1);
+}
+
+class Retake extends $pb.GeneratedMessage {
+  factory Retake({
+    $core.String? name,
+    $core.String? room,
+    Lecturer? lecturer,
+    $core.int? number,
+    TimeRange? timeRange,
+    $1.Timestamp? date,
+  }) {
+    final $result = create();
+    if (name != null) {
+      $result.name = name;
+    }
+    if (room != null) {
+      $result.room = room;
+    }
+    if (lecturer != null) {
+      $result.lecturer = lecturer;
+    }
+    if (number != null) {
+      $result.number = number;
+    }
+    if (timeRange != null) {
+      $result.timeRange = timeRange;
+    }
+    if (date != null) {
+      $result.date = date;
+    }
+    return $result;
+  }
+  Retake._() : super();
+  factory Retake.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory Retake.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'Retake', package: const $pb.PackageName(_omitMessageNames ? '' : 'csu'), createEmptyInstance: create)
+    ..aOS(1, _omitFieldNames ? '' : 'name')
+    ..aOS(2, _omitFieldNames ? '' : 'room')
+    ..aOM<Lecturer>(3, _omitFieldNames ? '' : 'lecturer', subBuilder: Lecturer.create)
+    ..a<$core.int>(4, _omitFieldNames ? '' : 'number', $pb.PbFieldType.O3)
+    ..aOM<TimeRange>(5, _omitFieldNames ? '' : 'timeRange', protoName: 'timeRange', subBuilder: TimeRange.create)
+    ..aOM<$1.Timestamp>(6, _omitFieldNames ? '' : 'date', subBuilder: $1.Timestamp.create)
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  Retake clone() => Retake()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  Retake copyWith(void Function(Retake) updates) => super.copyWith((message) => updates(message as Retake)) as Retake;
+
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static Retake create() => Retake._();
+  Retake createEmptyInstance() => create();
+  static $pb.PbList<Retake> createRepeated() => $pb.PbList<Retake>();
+  @$core.pragma('dart2js:noInline')
+  static Retake getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<Retake>(create);
+  static Retake? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.String get name => $_getSZ(0);
+  @$pb.TagNumber(1)
+  set name($core.String v) { $_setString(0, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasName() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearName() => clearField(1);
+
+  @$pb.TagNumber(2)
+  $core.String get room => $_getSZ(1);
+  @$pb.TagNumber(2)
+  set room($core.String v) { $_setString(1, v); }
+  @$pb.TagNumber(2)
+  $core.bool hasRoom() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearRoom() => clearField(2);
+
+  @$pb.TagNumber(3)
+  Lecturer get lecturer => $_getN(2);
+  @$pb.TagNumber(3)
+  set lecturer(Lecturer v) { setField(3, v); }
+  @$pb.TagNumber(3)
+  $core.bool hasLecturer() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearLecturer() => clearField(3);
+  @$pb.TagNumber(3)
+  Lecturer ensureLecturer() => $_ensure(2);
+
+  @$pb.TagNumber(4)
+  $core.int get number => $_getIZ(3);
+  @$pb.TagNumber(4)
+  set number($core.int v) { $_setSignedInt32(3, v); }
+  @$pb.TagNumber(4)
+  $core.bool hasNumber() => $_has(3);
+  @$pb.TagNumber(4)
+  void clearNumber() => clearField(4);
+
+  @$pb.TagNumber(5)
+  TimeRange get timeRange => $_getN(4);
+  @$pb.TagNumber(5)
+  set timeRange(TimeRange v) { setField(5, v); }
+  @$pb.TagNumber(5)
+  $core.bool hasTimeRange() => $_has(4);
+  @$pb.TagNumber(5)
+  void clearTimeRange() => clearField(5);
+  @$pb.TagNumber(5)
+  TimeRange ensureTimeRange() => $_ensure(4);
+
+  @$pb.TagNumber(6)
+  $1.Timestamp get date => $_getN(5);
+  @$pb.TagNumber(6)
+  set date($1.Timestamp v) { setField(6, v); }
+  @$pb.TagNumber(6)
+  $core.bool hasDate() => $_has(5);
+  @$pb.TagNumber(6)
+  void clearDate() => clearField(6);
+  @$pb.TagNumber(6)
+  $1.Timestamp ensureDate() => $_ensure(5);
+}
+
+class RetakesRequest extends $pb.GeneratedMessage {
+  factory RetakesRequest({
+    $core.String? group,
+  }) {
+    final $result = create();
+    if (group != null) {
+      $result.group = group;
+    }
+    return $result;
+  }
+  RetakesRequest._() : super();
+  factory RetakesRequest.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory RetakesRequest.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'RetakesRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'csu'), createEmptyInstance: create)
+    ..aOS(1, _omitFieldNames ? '' : 'group')
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  RetakesRequest clone() => RetakesRequest()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  RetakesRequest copyWith(void Function(RetakesRequest) updates) => super.copyWith((message) => updates(message as RetakesRequest)) as RetakesRequest;
+
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static RetakesRequest create() => RetakesRequest._();
+  RetakesRequest createEmptyInstance() => create();
+  static $pb.PbList<RetakesRequest> createRepeated() => $pb.PbList<RetakesRequest>();
+  @$core.pragma('dart2js:noInline')
+  static RetakesRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<RetakesRequest>(create);
+  static RetakesRequest? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.String get group => $_getSZ(0);
+  @$pb.TagNumber(1)
+  set group($core.String v) { $_setString(0, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasGroup() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearGroup() => clearField(1);
+}
+
+class RetakesResponse extends $pb.GeneratedMessage {
+  factory RetakesResponse({
+    $core.Iterable<Retake>? retakes,
+  }) {
+    final $result = create();
+    if (retakes != null) {
+      $result.retakes.addAll(retakes);
+    }
+    return $result;
+  }
+  RetakesResponse._() : super();
+  factory RetakesResponse.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory RetakesResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'RetakesResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'csu'), createEmptyInstance: create)
+    ..pc<Retake>(1, _omitFieldNames ? '' : 'retakes', $pb.PbFieldType.PM, subBuilder: Retake.create)
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  RetakesResponse clone() => RetakesResponse()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  RetakesResponse copyWith(void Function(RetakesResponse) updates) => super.copyWith((message) => updates(message as RetakesResponse)) as RetakesResponse;
+
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static RetakesResponse create() => RetakesResponse._();
+  RetakesResponse createEmptyInstance() => create();
+  static $pb.PbList<RetakesResponse> createRepeated() => $pb.PbList<RetakesResponse>();
+  @$core.pragma('dart2js:noInline')
+  static RetakesResponse getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<RetakesResponse>(create);
+  static RetakesResponse? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.List<Retake> get retakes => $_getList(0);
 }
 
 

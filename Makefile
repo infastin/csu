@@ -3,7 +3,11 @@ lint:
 .PHONY: lint
 
 proto:
-	protoc --dart_out=grpc:lib/grpc/generated -Iprotos protos/csu.proto
+	protoc --dart_out=grpc:lib/grpc \
+		-Iprotos \
+		-I/usr/include/google/protobuf \
+		csu.proto \
+		google/protobuf/timestamp.proto
 .PHONY: proto
 
 gen-loc:

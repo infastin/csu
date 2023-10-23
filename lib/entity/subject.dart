@@ -1,6 +1,6 @@
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-import '../grpc/generated/csu.pbgrpc.dart' as pb;
+import '../grpc/csu.pbgrpc.dart' as pb;
 
 import 'lecturer.dart';
 import 'time_range.dart';

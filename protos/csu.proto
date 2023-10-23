@@ -1,5 +1,7 @@
 syntax = "proto3";
 
+import "google/protobuf/timestamp.proto";
+
 option java_multiple_files = true;
 option java_package = "ru.csu.app";
 option java_outer_classname = "CSUAppProto";
@@ -8,6 +10,7 @@ package csu;
 
 service Service {
   rpc GetSchedule(ScheduleRequest) returns (ScheduleResponse) {}
+  rpc GetRetakes(RetakesRequest) returns (RetakesResponse) {}
 }
 
 message Lecturer {
@@ -42,7 +45,7 @@ message Subject {
 }
 
 message Day {
-  int32 weekday             = 1;
+           int32   weekday  = 1;
   repeated Subject subjects = 2;
 }
 
@@ -53,4 +56,21 @@ message ScheduleRequest {
 message ScheduleResponse {
   repeated Day oddWeek  = 1;
   repeated Day evenWeek = 2;
+}
+
+message Retake {
+                  string    name      = 1;
+                  string    room      = 2;
+                  Lecturer  lecturer  = 3;
+                  int32     number    = 4;
+                  TimeRange timeRange = 5;
+  google.protobuf.Timestamp date      = 6;
+}
+
+message RetakesRequest {
+  string group = 1;
+}
+
+message RetakesResponse {
+  repeated Retake retakes = 1;
 }

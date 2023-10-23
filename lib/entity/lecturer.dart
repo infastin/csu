@@ -1,4 +1,4 @@
-import '../grpc/generated/csu.pbgrpc.dart' as pb;
+import '../grpc/csu.pbgrpc.dart' as pb;
 
 class LecturerEntity {
   const LecturerEntity({
