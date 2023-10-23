@@ -7,6 +7,7 @@
 	"systemTheme": "System",
 	"lightTheme": "Light",
 	"darkTheme": "Dark",
+  "unknown": "Unknown",
 	"lecture": "Lecture",
 	"practice": "Pratice",
 	"lab": "Lab",
@@ -18,5 +19,7 @@
 	"odd": "Odd",
   "current": "Current",
 	"cancel": "Cancel",
-	"ok": "OK"
+	"ok": "OK",
+  "noSchedule": "No schedule",
+  "noRetakes": "No retakes"
 }

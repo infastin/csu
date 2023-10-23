@@ -4,6 +4,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../entity/entity.dart';
+import 'dot.dart';
 
 class SubjectWidget extends StatelessWidget {
   const SubjectWidget({
@@ -12,8 +13,6 @@ class SubjectWidget extends StatelessWidget {
   });
 
   final SubjectEntity subject;
-
-  static const _dot = Text("•", textAlign: TextAlign.center);
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +24,7 @@ class SubjectWidget extends StatelessWidget {
     var room = subject.room;
     Uri? uri;
 
-    if (room.startsWith("Discord;")) {
+    if (room.contains(";")) {
       final parts = room.split(";");
       uri = Uri.tryParse(parts.sublist(1).join());
       room = parts[0];
@@ -46,18 +45,12 @@ class SubjectWidget extends StatelessWidget {
                 color: colorScheme.onSurface.withOpacity(0.7),
               ),
             ),
-            const SizedBox(
-              width: 12,
-              child: _dot,
-            ),
+            const Dot(),
             Text(
               subject.timeRange.format(context),
               style: textTheme.labelLarge,
             ),
-            const SizedBox(
-              width: 12,
-              child: _dot,
-            ),
+            const Dot(),
             if (uri != null) RichText(
               text: TextSpan(
                 text: room,

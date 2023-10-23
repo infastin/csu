@@ -4,11 +4,17 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../widgets/widgets.dart';
 import '../repo/data.dart' as data;
 import '../utils/utils.dart';
+import '../entity/entity.dart';
 
 class ScheduleView extends StatefulWidget {
   ScheduleView({super.key});
 
-  final days = [data.oddDays, data.evenDays];
+  final ScheduleEntity? schedule = ScheduleEntity(
+    oddWeek: data.oddDays,
+    evenWeek: data.evenDays
+  );
+
+  // final ScheduleEntity? schedule = null;
 
   @override
   State<ScheduleView> createState() => _ScheduleViewState();
@@ -19,11 +25,15 @@ class _ScheduleViewState extends State<ScheduleView> {
 
   @override
   Widget build(BuildContext context) {
+    if (widget.schedule == null) {
+      return const _NoSchedule();
+    }
+
     var theme = Theme.of(context);
     var textTheme = theme.textTheme;
     var colorScheme = theme.colorScheme;
-    var days = widget.days[_selectedWeek];
     var loc = AppLocalizations.of(context)!;
+    var days = widget.schedule!.getWeek(_selectedWeek);
 
     return ListView.builder(
       itemCount: days.length + 1,
@@ -36,27 +46,37 @@ class _ScheduleViewState extends State<ScheduleView> {
           labels[realWeek] += " (${loc.current})";
 
           return Padding(
-            padding: const EdgeInsets.only(left: 16, right: 16, bottom: 8),
+            padding: const EdgeInsets.symmetric(horizontal: 16),
             child: Wrap(
               spacing: 8,
               crossAxisAlignment: WrapCrossAlignment.center,
               children: [
-                Text("${loc.week}:"),
-                for (int i = 0; i < labels.length; ++i) ChoiceChip(
-                  label: Text(labels[i]),
-                  labelStyle: textTheme.titleSmall?.copyWith(
-                    color: (_selectedWeek == i) ? colorScheme.onSecondary : colorScheme.onSurface
-                  ),
-                  selectedColor: colorScheme.secondary,
-                  showCheckmark: false,
-                  selected: _selectedWeek == i,
-                  onSelected: (bool selected) {
-                    setState(() => _selectedWeek = selected ? i : _selectedWeek);
-                  }
+                Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 4),
+                  child: Text("${loc.week}:")
+                ),
+                for (int i = 0; i < labels.length; ++i) Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 4),
+                  child: ChoiceChip(
+                    label: Text(labels[i]),
+                    labelStyle: textTheme.titleSmall?.copyWith(
+                      color: (_selectedWeek == i) ? colorScheme.onSecondary : colorScheme.onSurface
+                    ),
+                    selectedColor: colorScheme.secondary,
+                    showCheckmark: false,
+                    selected: _selectedWeek == i,
+                    onSelected: (bool selected) {
+                      setState(() => _selectedWeek = selected ? i : _selectedWeek);
+                    }
+                  )
                 )
               ]
             )
           );
+        }
+
+        if (days.isEmpty) {
+          return const _NoSchedule();
         }
 
         var startDate = now.subtract(Duration(days: now.weekday));
@@ -69,6 +89,29 @@ class _ScheduleViewState extends State<ScheduleView> {
           child: DayWidget(day: days[index-1], startDate: startDate)
         );
       },
+    );
+  }
+}
+
+class _NoSchedule extends StatelessWidget {
+  const _NoSchedule({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    var theme = Theme.of(context);
+    var textTheme = theme.textTheme;
+    var colorScheme = theme.colorScheme;
+    var loc = AppLocalizations.of(context)!;
+
+    return Container(
+      alignment: Alignment.center,
+      padding: const EdgeInsets.all(8),
+      child: Text(
+        loc.noSchedule,
+        style: textTheme.titleLarge?.copyWith(
+          color: colorScheme.onBackground.withOpacity(0.7),
+        )
+      ),
     );
   }
 }
