@@ -13,3 +13,10 @@ proto:
 gen-loc:
 	flutter gen-l10n
 .PHONY: gen-loc
+
+gen-json:
+	dart run build_runner build
+.PHONY: gen-json
+
+gen: gen-loc gen-json
+.PHONY: gen

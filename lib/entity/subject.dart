@@ -1,10 +1,14 @@
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:json_annotation/json_annotation.dart';
 
 import '../grpc/csu.pbgrpc.dart' as pb;
 
 import 'lecturer.dart';
-import 'time_range.dart';
+import 'timerange.dart';
 
+part 'subject.g.dart';
+
+@JsonEnum(fieldRename: FieldRename.screamingSnake)
 enum SubjectType {
   unknown,
   lecture,
@@ -34,6 +38,7 @@ enum SubjectType {
   }
 }
 
+@JsonSerializable()
 class SubjectEntity {
   const SubjectEntity({
     required this.name,
@@ -55,10 +60,14 @@ class SubjectEntity {
     );
   }
 
+  factory SubjectEntity.fromJson(Map<String, dynamic> json) => _$SubjectEntityFromJson(json);
+
   final String name;
   final String room;
   final SubjectType type;
   final LecturerEntity lecturer;
   final int number;
   final TimeRange timeRange;
+
+  Map<String, dynamic> toJson() => _$SubjectEntityToJson(this);
 }

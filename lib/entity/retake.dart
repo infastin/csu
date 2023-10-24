@@ -1,8 +1,14 @@
+import 'package:csu/entity/timeofday.dart';
+import 'package:json_annotation/json_annotation.dart';
+
 import '../grpc/csu.pbgrpc.dart' as pb;
 
-import 'time_range.dart';
 import 'lecturer.dart';
+import 'timerange.dart';
 
+part 'retake.g.dart';
+
+@JsonSerializable(converters: [TimeOfDayJsonConverter()])
 class RetakeEntity {
   const RetakeEntity({
     required this.name,
@@ -24,10 +30,14 @@ class RetakeEntity {
     );
   }
 
+  factory RetakeEntity.fromJson(Map<String, dynamic> json) => _$RetakeEntityFromJson(json);
+
   final String name;
   final String room;
   final LecturerEntity lecturer;
   final int number;
   final TimeRange timeRange;
   final DateTime date;
+
+  Map<String, dynamic> toJson() => _$RetakeEntityToJson(this);
 }

@@ -1,7 +1,12 @@
-import 'day.dart';
+import 'package:json_annotation/json_annotation.dart';
 
 import '../grpc/csu.pbgrpc.dart' as pb;
 
+import 'day.dart';
+
+part 'schedule.g.dart';
+
+@JsonSerializable()
 class ScheduleEntity {
   const ScheduleEntity({
     required this.oddWeek,
@@ -26,8 +31,12 @@ class ScheduleEntity {
     );
   }
 
-  List<DayEntity> getWeek(int week) => (week % 2 == 0) ? oddWeek : evenWeek;
+  factory ScheduleEntity.fromJson(Map<String, dynamic> json) => _$ScheduleEntityFromJson(json);
 
   final List<DayEntity> oddWeek;
   final List<DayEntity> evenWeek;
+
+  List<DayEntity> getWeek(int week) => (week % 2 == 0) ? oddWeek : evenWeek;
+
+  Map<String, dynamic> toJson() => _$ScheduleEntityToJson(this);
 }
