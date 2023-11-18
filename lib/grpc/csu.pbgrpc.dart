@@ -19,14 +19,14 @@ import 'csu.pb.dart' as $0;
 
 export 'csu.pb.dart';
 
-@$pb.GrpcServiceName('csu.Service')
+@$pb.GrpcServiceName('schedule.Service')
 class ServiceClient extends $grpc.Client {
   static final _$getSchedule = $grpc.ClientMethod<$0.ScheduleRequest, $0.ScheduleResponse>(
-      '/csu.Service/GetSchedule',
+      '/schedule.Service/GetSchedule',
       ($0.ScheduleRequest value) => value.writeToBuffer(),
       ($core.List<$core.int> value) => $0.ScheduleResponse.fromBuffer(value));
   static final _$getRetakes = $grpc.ClientMethod<$0.RetakesRequest, $0.RetakesResponse>(
-      '/csu.Service/GetRetakes',
+      '/schedule.Service/GetRetakes',
       ($0.RetakesRequest value) => value.writeToBuffer(),
       ($core.List<$core.int> value) => $0.RetakesResponse.fromBuffer(value));
 
@@ -45,9 +45,9 @@ class ServiceClient extends $grpc.Client {
   }
 }
 
-@$pb.GrpcServiceName('csu.Service')
+@$pb.GrpcServiceName('schedule.Service')
 abstract class ServiceBase extends $grpc.Service {
-  $core.String get $name => 'csu.Service';
+  $core.String get $name => 'schedule.Service';
 
   ServiceBase() {
     $addMethod($grpc.ServiceMethod<$0.ScheduleRequest, $0.ScheduleResponse>(

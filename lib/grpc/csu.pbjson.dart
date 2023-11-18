@@ -46,15 +46,15 @@ final $typed_data.Uint8List timeOfDayDescriptor = $convert.base64Decode(
 const TimeRange$json = {
   '1': 'TimeRange',
   '2': [
-    {'1': 'start', '3': 1, '4': 1, '5': 11, '6': '.csu.TimeOfDay', '10': 'start'},
-    {'1': 'end', '3': 2, '4': 1, '5': 11, '6': '.csu.TimeOfDay', '10': 'end'},
+    {'1': 'start', '3': 1, '4': 1, '5': 11, '6': '.schedule.TimeOfDay', '10': 'start'},
+    {'1': 'end', '3': 2, '4': 1, '5': 11, '6': '.schedule.TimeOfDay', '10': 'end'},
   ],
 };
 
 /// Descriptor for `TimeRange`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List timeRangeDescriptor = $convert.base64Decode(
-    'CglUaW1lUmFuZ2USJAoFc3RhcnQYASABKAsyDi5jc3UuVGltZU9mRGF5UgVzdGFydBIgCgNlbm'
-    'QYAiABKAsyDi5jc3UuVGltZU9mRGF5UgNlbmQ=');
+    'CglUaW1lUmFuZ2USKQoFc3RhcnQYASABKAsyEy5zY2hlZHVsZS5UaW1lT2ZEYXlSBXN0YXJ0Ei'
+    'UKA2VuZBgCIAEoCzITLnNjaGVkdWxlLlRpbWVPZkRheVIDZW5k');
 
 @$core.Deprecated('Use subjectDescriptor instead')
 const Subject$json = {
@@ -62,10 +62,10 @@ const Subject$json = {
   '2': [
     {'1': 'name', '3': 1, '4': 1, '5': 9, '10': 'name'},
     {'1': 'room', '3': 2, '4': 1, '5': 9, '10': 'room'},
-    {'1': 'type', '3': 3, '4': 1, '5': 14, '6': '.csu.Subject.SubjectType', '10': 'type'},
-    {'1': 'lecturer', '3': 4, '4': 1, '5': 11, '6': '.csu.Lecturer', '10': 'lecturer'},
+    {'1': 'type', '3': 3, '4': 1, '5': 14, '6': '.schedule.Subject.SubjectType', '10': 'type'},
+    {'1': 'lecturer', '3': 4, '4': 1, '5': 11, '6': '.schedule.Lecturer', '10': 'lecturer'},
     {'1': 'number', '3': 5, '4': 1, '5': 5, '10': 'number'},
-    {'1': 'timeRange', '3': 6, '4': 1, '5': 11, '6': '.csu.TimeRange', '10': 'timeRange'},
+    {'1': 'timeRange', '3': 6, '4': 1, '5': 11, '6': '.schedule.TimeRange', '10': 'timeRange'},
   ],
   '4': [Subject_SubjectType$json],
 };
@@ -82,25 +82,25 @@ const Subject_SubjectType$json = {
 
 /// Descriptor for `Subject`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List subjectDescriptor = $convert.base64Decode(
-    'CgdTdWJqZWN0EhIKBG5hbWUYASABKAlSBG5hbWUSEgoEcm9vbRgCIAEoCVIEcm9vbRIsCgR0eX'
-    'BlGAMgASgOMhguY3N1LlN1YmplY3QuU3ViamVjdFR5cGVSBHR5cGUSKQoIbGVjdHVyZXIYBCAB'
-    'KAsyDS5jc3UuTGVjdHVyZXJSCGxlY3R1cmVyEhYKBm51bWJlchgFIAEoBVIGbnVtYmVyEiwKCX'
-    'RpbWVSYW5nZRgGIAEoCzIOLmNzdS5UaW1lUmFuZ2VSCXRpbWVSYW5nZSIxCgtTdWJqZWN0VHlw'
-    'ZRILCgdMRUNUVVJFEAASDAoIUFJBQ1RJQ0UQARIHCgNMQUIQAg==');
+    'CgdTdWJqZWN0EhIKBG5hbWUYASABKAlSBG5hbWUSEgoEcm9vbRgCIAEoCVIEcm9vbRIxCgR0eX'
+    'BlGAMgASgOMh0uc2NoZWR1bGUuU3ViamVjdC5TdWJqZWN0VHlwZVIEdHlwZRIuCghsZWN0dXJl'
+    'chgEIAEoCzISLnNjaGVkdWxlLkxlY3R1cmVyUghsZWN0dXJlchIWCgZudW1iZXIYBSABKAVSBm'
+    '51bWJlchIxCgl0aW1lUmFuZ2UYBiABKAsyEy5zY2hlZHVsZS5UaW1lUmFuZ2VSCXRpbWVSYW5n'
+    'ZSIxCgtTdWJqZWN0VHlwZRILCgdMRUNUVVJFEAASDAoIUFJBQ1RJQ0UQARIHCgNMQUIQAg==');
 
 @$core.Deprecated('Use dayDescriptor instead')
 const Day$json = {
   '1': 'Day',
   '2': [
     {'1': 'weekday', '3': 1, '4': 1, '5': 5, '10': 'weekday'},
-    {'1': 'subjects', '3': 2, '4': 3, '5': 11, '6': '.csu.Subject', '10': 'subjects'},
+    {'1': 'subjects', '3': 2, '4': 3, '5': 11, '6': '.schedule.Subject', '10': 'subjects'},
   ],
 };
 
 /// Descriptor for `Day`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List dayDescriptor = $convert.base64Decode(
-    'CgNEYXkSGAoHd2Vla2RheRgBIAEoBVIHd2Vla2RheRIoCghzdWJqZWN0cxgCIAMoCzIMLmNzdS'
-    '5TdWJqZWN0UghzdWJqZWN0cw==');
+    'CgNEYXkSGAoHd2Vla2RheRgBIAEoBVIHd2Vla2RheRItCghzdWJqZWN0cxgCIAMoCzIRLnNjaG'
+    'VkdWxlLlN1YmplY3RSCHN1YmplY3Rz');
 
 @$core.Deprecated('Use scheduleRequestDescriptor instead')
 const ScheduleRequest$json = {
@@ -118,15 +118,15 @@ final $typed_data.Uint8List scheduleRequestDescriptor = $convert.base64Decode(
 const ScheduleResponse$json = {
   '1': 'ScheduleResponse',
   '2': [
-    {'1': 'oddWeek', '3': 1, '4': 3, '5': 11, '6': '.csu.Day', '10': 'oddWeek'},
-    {'1': 'evenWeek', '3': 2, '4': 3, '5': 11, '6': '.csu.Day', '10': 'evenWeek'},
+    {'1': 'oddWeek', '3': 1, '4': 3, '5': 11, '6': '.schedule.Day', '10': 'oddWeek'},
+    {'1': 'evenWeek', '3': 2, '4': 3, '5': 11, '6': '.schedule.Day', '10': 'evenWeek'},
   ],
 };
 
 /// Descriptor for `ScheduleResponse`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List scheduleResponseDescriptor = $convert.base64Decode(
-    'ChBTY2hlZHVsZVJlc3BvbnNlEiIKB29kZFdlZWsYASADKAsyCC5jc3UuRGF5UgdvZGRXZWVrEi'
-    'QKCGV2ZW5XZWVrGAIgAygLMgguY3N1LkRheVIIZXZlbldlZWs=');
+    'ChBTY2hlZHVsZVJlc3BvbnNlEicKB29kZFdlZWsYASADKAsyDS5zY2hlZHVsZS5EYXlSB29kZF'
+    'dlZWsSKQoIZXZlbldlZWsYAiADKAsyDS5zY2hlZHVsZS5EYXlSCGV2ZW5XZWVr');
 
 @$core.Deprecated('Use retakeDescriptor instead')
 const Retake$json = {
@@ -134,19 +134,19 @@ const Retake$json = {
   '2': [
     {'1': 'name', '3': 1, '4': 1, '5': 9, '10': 'name'},
     {'1': 'room', '3': 2, '4': 1, '5': 9, '10': 'room'},
-    {'1': 'lecturer', '3': 3, '4': 1, '5': 11, '6': '.csu.Lecturer', '10': 'lecturer'},
+    {'1': 'lecturer', '3': 3, '4': 1, '5': 11, '6': '.schedule.Lecturer', '10': 'lecturer'},
     {'1': 'number', '3': 4, '4': 1, '5': 5, '10': 'number'},
-    {'1': 'timeRange', '3': 5, '4': 1, '5': 11, '6': '.csu.TimeRange', '10': 'timeRange'},
+    {'1': 'timeRange', '3': 5, '4': 1, '5': 11, '6': '.schedule.TimeRange', '10': 'timeRange'},
     {'1': 'date', '3': 6, '4': 1, '5': 11, '6': '.google.protobuf.Timestamp', '10': 'date'},
   ],
 };
 
 /// Descriptor for `Retake`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List retakeDescriptor = $convert.base64Decode(
-    'CgZSZXRha2USEgoEbmFtZRgBIAEoCVIEbmFtZRISCgRyb29tGAIgASgJUgRyb29tEikKCGxlY3'
-    'R1cmVyGAMgASgLMg0uY3N1LkxlY3R1cmVyUghsZWN0dXJlchIWCgZudW1iZXIYBCABKAVSBm51'
-    'bWJlchIsCgl0aW1lUmFuZ2UYBSABKAsyDi5jc3UuVGltZVJhbmdlUgl0aW1lUmFuZ2USLgoEZG'
-    'F0ZRgGIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXBSBGRhdGU=');
+    'CgZSZXRha2USEgoEbmFtZRgBIAEoCVIEbmFtZRISCgRyb29tGAIgASgJUgRyb29tEi4KCGxlY3'
+    'R1cmVyGAMgASgLMhIuc2NoZWR1bGUuTGVjdHVyZXJSCGxlY3R1cmVyEhYKBm51bWJlchgEIAEo'
+    'BVIGbnVtYmVyEjEKCXRpbWVSYW5nZRgFIAEoCzITLnNjaGVkdWxlLlRpbWVSYW5nZVIJdGltZV'
+    'JhbmdlEi4KBGRhdGUYBiABKAsyGi5nb29nbGUucHJvdG9idWYuVGltZXN0YW1wUgRkYXRl');
 
 @$core.Deprecated('Use retakesRequestDescriptor instead')
 const RetakesRequest$json = {
@@ -164,12 +164,12 @@ final $typed_data.Uint8List retakesRequestDescriptor = $convert.base64Decode(
 const RetakesResponse$json = {
   '1': 'RetakesResponse',
   '2': [
-    {'1': 'retakes', '3': 1, '4': 3, '5': 11, '6': '.csu.Retake', '10': 'retakes'},
+    {'1': 'retakes', '3': 1, '4': 3, '5': 11, '6': '.schedule.Retake', '10': 'retakes'},
   ],
 };
 
 /// Descriptor for `RetakesResponse`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List retakesResponseDescriptor = $convert.base64Decode(
-    'Cg9SZXRha2VzUmVzcG9uc2USJQoHcmV0YWtlcxgBIAMoCzILLmNzdS5SZXRha2VSB3JldGFrZX'
-    'M=');
+    'Cg9SZXRha2VzUmVzcG9uc2USKgoHcmV0YWtlcxgBIAMoCzIQLnNjaGVkdWxlLlJldGFrZVIHcm'
+    'V0YWtlcw==');
 

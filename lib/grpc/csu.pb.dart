@@ -40,7 +40,7 @@ class Lecturer extends $pb.GeneratedMessage {
   factory Lecturer.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
   factory Lecturer.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'Lecturer', package: const $pb.PackageName(_omitMessageNames ? '' : 'csu'), createEmptyInstance: create)
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'Lecturer', package: const $pb.PackageName(_omitMessageNames ? '' : 'schedule'), createEmptyInstance: create)
     ..aOS(1, _omitFieldNames ? '' : 'firstName', protoName: 'firstName')
     ..aOS(2, _omitFieldNames ? '' : 'lastName', protoName: 'lastName')
     ..aOS(3, _omitFieldNames ? '' : 'middleName', protoName: 'middleName')
@@ -114,7 +114,7 @@ class TimeOfDay extends $pb.GeneratedMessage {
   factory TimeOfDay.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
   factory TimeOfDay.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'TimeOfDay', package: const $pb.PackageName(_omitMessageNames ? '' : 'csu'), createEmptyInstance: create)
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'TimeOfDay', package: const $pb.PackageName(_omitMessageNames ? '' : 'schedule'), createEmptyInstance: create)
     ..a<$core.int>(1, _omitFieldNames ? '' : 'hour', $pb.PbFieldType.O3)
     ..a<$core.int>(2, _omitFieldNames ? '' : 'minute', $pb.PbFieldType.O3)
     ..hasRequiredFields = false
@@ -178,7 +178,7 @@ class TimeRange extends $pb.GeneratedMessage {
   factory TimeRange.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
   factory TimeRange.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'TimeRange', package: const $pb.PackageName(_omitMessageNames ? '' : 'csu'), createEmptyInstance: create)
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'TimeRange', package: const $pb.PackageName(_omitMessageNames ? '' : 'schedule'), createEmptyInstance: create)
     ..aOM<TimeOfDay>(1, _omitFieldNames ? '' : 'start', subBuilder: TimeOfDay.create)
     ..aOM<TimeOfDay>(2, _omitFieldNames ? '' : 'end', subBuilder: TimeOfDay.create)
     ..hasRequiredFields = false
@@ -262,7 +262,7 @@ class Subject extends $pb.GeneratedMessage {
   factory Subject.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
   factory Subject.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'Subject', package: const $pb.PackageName(_omitMessageNames ? '' : 'csu'), createEmptyInstance: create)
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'Subject', package: const $pb.PackageName(_omitMessageNames ? '' : 'schedule'), createEmptyInstance: create)
     ..aOS(1, _omitFieldNames ? '' : 'name')
     ..aOS(2, _omitFieldNames ? '' : 'room')
     ..e<Subject_SubjectType>(3, _omitFieldNames ? '' : 'type', $pb.PbFieldType.OE, defaultOrMaker: Subject_SubjectType.LECTURE, valueOf: Subject_SubjectType.valueOf, enumValues: Subject_SubjectType.values)
@@ -370,7 +370,7 @@ class Day extends $pb.GeneratedMessage {
   factory Day.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
   factory Day.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'Day', package: const $pb.PackageName(_omitMessageNames ? '' : 'csu'), createEmptyInstance: create)
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'Day', package: const $pb.PackageName(_omitMessageNames ? '' : 'schedule'), createEmptyInstance: create)
     ..a<$core.int>(1, _omitFieldNames ? '' : 'weekday', $pb.PbFieldType.O3)
     ..pc<Subject>(2, _omitFieldNames ? '' : 'subjects', $pb.PbFieldType.PM, subBuilder: Subject.create)
     ..hasRequiredFields = false
@@ -424,7 +424,7 @@ class ScheduleRequest extends $pb.GeneratedMessage {
   factory ScheduleRequest.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
   factory ScheduleRequest.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'ScheduleRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'csu'), createEmptyInstance: create)
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'ScheduleRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'schedule'), createEmptyInstance: create)
     ..aOS(1, _omitFieldNames ? '' : 'group')
     ..hasRequiredFields = false
   ;
@@ -478,7 +478,7 @@ class ScheduleResponse extends $pb.GeneratedMessage {
   factory ScheduleResponse.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
   factory ScheduleResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'ScheduleResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'csu'), createEmptyInstance: create)
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'ScheduleResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'schedule'), createEmptyInstance: create)
     ..pc<Day>(1, _omitFieldNames ? '' : 'oddWeek', $pb.PbFieldType.PM, protoName: 'oddWeek', subBuilder: Day.create)
     ..pc<Day>(2, _omitFieldNames ? '' : 'evenWeek', $pb.PbFieldType.PM, protoName: 'evenWeek', subBuilder: Day.create)
     ..hasRequiredFields = false
@@ -546,7 +546,7 @@ class Retake extends $pb.GeneratedMessage {
   factory Retake.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
   factory Retake.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'Retake', package: const $pb.PackageName(_omitMessageNames ? '' : 'csu'), createEmptyInstance: create)
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'Retake', package: const $pb.PackageName(_omitMessageNames ? '' : 'schedule'), createEmptyInstance: create)
     ..aOS(1, _omitFieldNames ? '' : 'name')
     ..aOS(2, _omitFieldNames ? '' : 'room')
     ..aOM<Lecturer>(3, _omitFieldNames ? '' : 'lecturer', subBuilder: Lecturer.create)
@@ -652,7 +652,7 @@ class RetakesRequest extends $pb.GeneratedMessage {
   factory RetakesRequest.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
   factory RetakesRequest.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'RetakesRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'csu'), createEmptyInstance: create)
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'RetakesRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'schedule'), createEmptyInstance: create)
     ..aOS(1, _omitFieldNames ? '' : 'group')
     ..hasRequiredFields = false
   ;
@@ -702,7 +702,7 @@ class RetakesResponse extends $pb.GeneratedMessage {
   factory RetakesResponse.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
   factory RetakesResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'RetakesResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'csu'), createEmptyInstance: create)
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'RetakesResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'schedule'), createEmptyInstance: create)
     ..pc<Retake>(1, _omitFieldNames ? '' : 'retakes', $pb.PbFieldType.PM, subBuilder: Retake.create)
     ..hasRequiredFields = false
   ;

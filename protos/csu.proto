@@ -6,7 +6,8 @@ option java_multiple_files = true;
 option java_package = "ru.csu.app";
 option java_outer_classname = "CSUAppProto";
 option objc_class_prefix = "CSU";
-package csu;
+
+package schedule;
 
 service Service {
   rpc GetSchedule(ScheduleRequest) returns (ScheduleResponse) {}
