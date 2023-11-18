@@ -1,3 +1,3 @@
 export 'schedule.dart';
-export 'settings.dart';
 export 'retakes.dart';
+export 'other.dart';

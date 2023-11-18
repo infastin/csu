@@ -1,9 +1,11 @@
+import 'package:csu/repo/app_info_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:adaptive_theme/adaptive_theme.dart';
 import 'package:provider/provider.dart';
 import 'package:system_theme/system_theme.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:package_info_plus/package_info_plus.dart';
 
 import 'view/view.dart';
 import 'repo/repo.dart';
@@ -38,17 +40,19 @@ var _routes = <_Route>[
     selectedIcon:const Icon(Icons.accessible_forward),
   ),
   _Route(
-    localize: (loc) => loc.settings,
-    location: "/settings",
-    icon: const Icon(Icons.settings_outlined),
-    selectedIcon: const Icon(Icons.settings),
+    localize: (loc) => loc.other,
+    location: "/other",
+    icon: const Icon(Icons.list),
+    selectedIcon: const Icon(Icons.list),
   ),
 ];
 
 const _locationIndices = {
   "/schedule": 0,
   "/retakes": 1,
-  "/settings": 2,
+  "/other": 2,
+  "/other/about": 2,
+  "/other/about/license": 2,
 };
 
 final _rootNavigatorKey = GlobalKey<NavigatorState>();
@@ -68,22 +72,40 @@ final _router = GoRouter(
           path: "/schedule",
           pageBuilder: (context, state) => MaterialPage(
             key: state.pageKey,
-            child: PageScaffold(state: state, child: ScheduleView()),
+            child: const ScheduleView(),
           ),
         ),
         GoRoute(
           path: "/retakes",
           pageBuilder: (context, state) => MaterialPage(
             key: state.pageKey,
-            child: PageScaffold(state: state, child: RetakesView()),
+            child: const RetakesView(),
           ),
         ),
         GoRoute(
-          path: "/settings",
+          path: "/other",
           pageBuilder: (context, state) => MaterialPage(
             key: state.pageKey,
-            child: PageScaffold(state: state, child: const SettingsView()),
+            child: const OtherView(),
           ),
+          routes: [
+            GoRoute(
+              path: "about",
+              pageBuilder: (context, state) => MaterialPage(
+                key: state.pageKey,
+                child: const AboutView(),
+              ),
+              routes: [
+                GoRoute(
+                  path: "license",
+                  pageBuilder: (context, state) => MaterialPage(
+                    key: state.pageKey,
+                    child: const LicenseView(),
+                  )
+                )
+              ]
+            ),
+          ]
         ),
       ]
     )
@@ -96,10 +118,12 @@ void main() async {
   final savedThemeMode = await AdaptiveTheme.getThemeMode();
   final savedLocale = await Preferences.getLocale();
   final savedGroup = await Preferences.getGroup();
+  final packageInfo = await PackageInfo.fromPlatform();
   runApp(App(
     savedThemeMode: savedThemeMode,
     savedLocale: savedLocale,
     savedGroup: savedGroup,
+    packageInfo: packageInfo,
   ));
 }
 
@@ -108,12 +132,14 @@ class App extends StatelessWidget {
     super.key,
     required this.savedThemeMode,
     required this.savedLocale,
-    required this.savedGroup
+    required this.savedGroup,
+    required this.packageInfo
   });
 
   final AdaptiveThemeMode? savedThemeMode;
   final Locale? savedLocale;
   final String? savedGroup;
+  final PackageInfo packageInfo;
 
   // This widget is the root of your application.
   @override
@@ -136,41 +162,21 @@ class App extends StatelessWidget {
             locale: savedLocale ?? Preferences.getDefaultLocale(),
             group: savedGroup ?? ""
           ),
-          builder: (context, child) => MaterialApp.router(
-            theme: light,
-            darkTheme: dark,
-            routerConfig: _router,
-            locale: Provider.of<PreferencesProvider>(context).locale,
-            localizationsDelegates: AppLocalizations.localizationsDelegates,
-            supportedLocales: AppLocalizations.supportedLocales,
+          builder: (context, child) => Provider<AppInfoProvider>(
+            create: (_) => AppInfoProvider(
+              packageInfo: packageInfo
+            ),
+            builder: (context, child) => MaterialApp.router(
+              theme: light,
+              darkTheme: dark,
+              routerConfig: _router,
+              locale: Provider.of<PreferencesProvider>(context).locale,
+              localizationsDelegates: AppLocalizations.localizationsDelegates,
+              supportedLocales: AppLocalizations.supportedLocales,
+            )
           )
         )
       )
-    );
-  }
-}
-
-class PageScaffold extends StatelessWidget {
-  const PageScaffold({
-    super.key,
-    required this.state,
-    required this.child,
-  });
-
-  final GoRouterState state;
-  final Widget child;
-
-  @override
-  Widget build(BuildContext context) {
-    var location = state.uri.toString();
-    var currentRouteIdx = _locationIndices[location]!;
-    var loc = AppLocalizations.of(context)!;
-
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(_routes[currentRouteIdx].localize(loc)),
-      ),
-      body: child,
     );
   }
 }

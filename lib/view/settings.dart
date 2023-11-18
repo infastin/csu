@@ -1,12 +1,20 @@
-import 'package:adaptive_theme/adaptive_theme.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:provider/provider.dart';
-
-import '../repo/repo.dart';
+part of 'other.dart';
 
 class SettingsView extends StatelessWidget {
   const SettingsView({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    var loc = AppLocalizations.of(context)!;
+    return Scaffold(
+      appBar: AppBar(title: Text(loc.settings)),
+      body: const _SettingsBody(),
+    );
+  }
+}
+
+class _SettingsBody extends StatelessWidget {
+  const _SettingsBody({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -26,6 +34,7 @@ class SettingsView extends StatelessWidget {
     };
 
     return ListView(
+      padding: const EdgeInsets.symmetric(vertical: 4),
       children: [
         _SettingsSection(
           title: loc.appearance,
@@ -51,7 +60,7 @@ class SettingsView extends StatelessWidget {
           ]
         ),
         _SettingsSection(
-          title: loc.other,
+          title: loc.info,
           children: [
             _SettingsTile(
               title: Text(loc.group),
@@ -63,6 +72,16 @@ class SettingsView extends StatelessWidget {
               ),
             )
           ]
+        ),
+        _SettingsSection(
+          title: loc.other,
+          children: [
+            _SettingsTile(
+              title: Text(loc.about),
+              icon: const Icon(Icons.info),
+              onTap: () => GoRouter.of(context).go("/other/about"),
+            ),
+          ],
         ),
       ],
     );

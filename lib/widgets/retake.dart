@@ -95,12 +95,12 @@ class _RetakeBody extends StatelessWidget {
                 color: colorScheme.onSurface.withOpacity(0.7),
               ),
             ),
-            const Dot(),
+            const Dot(width: 12),
             Text(
               retake.timeRange.format(context),
               style: textTheme.labelLarge,
             ),
-            const Dot(),
+            const Dot(width: 12),
             if (uri != null) RichText(
               text: TextSpan(
                 text: room,

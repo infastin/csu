@@ -21,5 +21,13 @@
   "cancel": "Отменить",
   "ok": "Ок",
   "noSchedule": "Расписания нет",
-  "noRetakes": "Пересдач нет"
+  "noRetakes": "Пересдач нет",
+  "timetable": "График",
+  "info": "Информация",
+  "about": "О приложении",
+  "csu": "ЧелГУ",
+  "version": "Версия",
+  "license": "Лицензия",
+  "thirdPartyLicenses": "Сторонние лицензии",
+  "sourceCode": "Исходный код"
 }

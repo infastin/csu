@@ -6,7 +6,20 @@ import '../widgets/widgets.dart';
 import '../entity/entity.dart';
 
 class RetakesView extends StatelessWidget {
-  RetakesView({super.key});
+  const RetakesView({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    var loc = AppLocalizations.of(context)!;
+    return Scaffold(
+      appBar: AppBar(title: Text(loc.retakes)),
+      body: _RetakesBody(),
+    );
+  }
+}
+
+class _RetakesBody extends StatelessWidget {
+  _RetakesBody({super.key});
 
   final List<RetakeEntity>? retakes = data.retakes;
 

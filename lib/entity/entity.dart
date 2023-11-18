@@ -5,3 +5,4 @@ export 'timerange.dart';
 export 'lecturer.dart';
 export 'retake.dart';
 export 'retakes.dart';
+export 'appinfo.dart';

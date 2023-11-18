@@ -21,5 +21,13 @@
   "cancel": "Cancel",
   "ok": "OK",
   "noSchedule": "No schedule",
-  "noRetakes": "No retakes"
+  "noRetakes": "No retakes",
+  "timetable": "Timetable",
+  "info": "Info",
+  "about": "About",
+  "csu": "CSU",
+  "version": "Version",
+  "license": "License",
+  "thirdPartyLicenses": "Third-Party Licenses",
+  "sourceCode": "Source Code"
 }

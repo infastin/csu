@@ -6,8 +6,21 @@ import '../repo/data.dart' as data;
 import '../utils/utils.dart';
 import '../entity/entity.dart';
 
-class ScheduleView extends StatefulWidget {
-  ScheduleView({super.key});
+class ScheduleView extends StatelessWidget {
+  const ScheduleView({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    var loc = AppLocalizations.of(context)!;
+    return Scaffold(
+      appBar: AppBar(title: Text(loc.schedule)),
+      body: _ScheduleBody(),
+    );
+  }
+}
+
+class _ScheduleBody extends StatefulWidget {
+  _ScheduleBody({super.key});
 
   final ScheduleEntity? schedule = ScheduleEntity(
     oddWeek: data.oddDays,
@@ -17,10 +30,10 @@ class ScheduleView extends StatefulWidget {
   // final ScheduleEntity? schedule = null;
 
   @override
-  State<ScheduleView> createState() => _ScheduleViewState();
+  State<_ScheduleBody> createState() => _ScheduleBodyState();
 }
 
-class _ScheduleViewState extends State<ScheduleView> {
+class _ScheduleBodyState extends State<_ScheduleBody> {
   int _selectedWeek = DateTime.now().isoWeekNumber.isOdd ? 0 : 1;
 
   @override
