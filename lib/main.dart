@@ -178,6 +178,7 @@ class App extends StatelessWidget {
               schedule: schedule,
               retakes: retakes,
             )),
+            Provider(create: (_) => GrpcProvider()),
           ],
           builder: (context, child) => MaterialApp.router(
             theme: light,

@@ -6,3 +6,4 @@ export 'lecturer.dart';
 export 'retake.dart';
 export 'retakes.dart';
 export 'appinfo.dart';
+export 'config.dart';

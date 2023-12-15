@@ -15,6 +15,7 @@ gen-loc:
 .PHONY: gen-loc
 
 gen-runner:
+	dart run build_runner clean
 	dart run build_runner build
 .PHONY: gen-json
 

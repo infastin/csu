@@ -3,11 +3,11 @@ import 'package:grpc/grpc.dart';
 import '../grpc/csu.pbgrpc.dart' as pb;
 import '../entity/entity.dart';
 
-class Grpc {
-  Grpc({required String host, required int port}) {
+class GrpcProvider {
+  GrpcProvider() {
     _channel = ClientChannel(
-      host,
-      port: port,
+      appConfig.grpcHost,
+      port: appConfig.grpcPort,
       options: ChannelOptions(
         credentials: const ChannelCredentials.insecure(),
         codecRegistry: CodecRegistry(codecs: const [GzipCodec(), IdentityCodec()])
