@@ -42,7 +42,7 @@ class _RetakesBody extends StatelessWidget {
       scaffoldMessenger.showSnackBar(
         SnackBar(
           content: Text(
-            "${e.providerCode.localize(loc)}: ${e.grpcCode.localize(loc)}",
+            e.localize(loc),
             style: textStyle.copyWith(
               color: colorScheme.onError,
               fontWeight: FontWeight.bold,
@@ -63,7 +63,7 @@ class _RetakesBody extends StatelessWidget {
     getRetakes(context, false);
 
     late final Widget body;
-    if (cache.retakes != null) {
+    if (cache.retakes != null && cache.retakes!.isNotEmpty) {
       body = const _RetakesBodyList();
     } else {
       body = const _RetakesBodyNone();

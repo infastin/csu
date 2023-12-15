@@ -103,20 +103,54 @@ enum GrpcProviderErrorCode {
   }
 }
 
+enum GrpcErrorMessage {
+  none(message: "none"),
+  unknown(message: "unknown"),
+  noSuchGroup(message: "no such group");
+
+  const GrpcErrorMessage({required this.message});
+
+  factory GrpcErrorMessage.fromMessage(String? message) {
+    return switch (message) {
+      null => none,
+      "no such group" => noSuchGroup,
+      _ => unknown,
+    };
+  }
+
+  String localize(AppLocalizations loc) {
+    return switch (this) {
+      none => "",
+      unknown => loc.grpcUnknown,
+      noSuchGroup => loc.grpcNoSuchGroup,
+    };
+  }
+
+  final String message;
+}
+
 class GrpcException implements Exception {
   GrpcException({
     required this.grpcCode,
     required this.providerCode,
-    this.message,
+    required this.message,
   });
 
   final GrpcErrorCode grpcCode;
   final GrpcProviderErrorCode providerCode;
-  final String? message;
+  final GrpcErrorMessage message;
 
   @override
   String toString() =>
     "GRPC Exception (code: $grpcCode, providerCode: $providerCode, message: $message)";
+
+  String localize(AppLocalizations loc) {
+    if (message == GrpcErrorMessage.none || message == GrpcErrorMessage.none) {
+      return "${providerCode.localize(loc)}: ${grpcCode.localize(loc)}";
+    } else {
+      return "${providerCode.localize(loc)}: ${message.localize(loc)}";
+    }
+  }
 }
 
 class GrpcProvider {
@@ -147,7 +181,7 @@ class GrpcProvider {
       throw GrpcException(
         grpcCode: GrpcErrorCode.fromCode(e.code),
         providerCode: GrpcProviderErrorCode.couldNotGetSchedule,
-        message: e.message,
+        message: GrpcErrorMessage.fromMessage(e.message),
       );
     }
   }
@@ -163,7 +197,7 @@ class GrpcProvider {
       throw GrpcException(
         grpcCode: GrpcErrorCode.fromCode(e.code),
         providerCode: GrpcProviderErrorCode.couldNotGetRetakes,
-        message: e.message,
+        message: GrpcErrorMessage.fromMessage(e.message),
       );
     }
   }

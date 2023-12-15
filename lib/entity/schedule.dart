@@ -36,6 +36,9 @@ class ScheduleEntity {
   final List<DayEntity> oddWeek;
   final List<DayEntity> evenWeek;
 
+  bool get isEmpty => oddWeek.isEmpty && evenWeek.isEmpty;
+  bool get isNotEmpty => !isEmpty;
+
   List<DayEntity> getWeek(int week) => (week % 2 == 0) ? oddWeek : evenWeek;
 
   Map<String, dynamic> toJson() => _$ScheduleEntityToJson(this);

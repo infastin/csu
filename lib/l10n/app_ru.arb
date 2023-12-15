@@ -49,5 +49,6 @@
   "grpcDataLoss": "Потеря данных",
   "grpcUnauthenticated": "Неавторизован",
   "grpcCouldNotGetSchedule": "Не удалось получить расписание",
-  "grpcCouldNotGetRetakes": "Не удалось получить список пересдач"
+  "grpcCouldNotGetRetakes": "Не удалось получить список пересдач",
+  "grpcNoSuchGroup": "Нет такой группы"
 }

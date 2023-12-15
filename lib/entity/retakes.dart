@@ -24,5 +24,8 @@ class RetakesEntity {
 
   final List<RetakeEntity> retakes;
 
+  bool get isEmpty => retakes.isEmpty;
+  bool get isNotEmpty => !isEmpty;
+
   Map<String, dynamic> toJson() => _$RetakesEntityToJson(this);
 }

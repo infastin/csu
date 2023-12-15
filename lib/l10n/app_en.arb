@@ -49,5 +49,6 @@
   "grpcDataLoss": "Data loss",
   "grpcUnauthenticated": "Unauthenticated",
   "grpcCouldNotGetSchedule": "Could not get schedule",
-  "grpcCouldNotGetRetakes": "Could not get retakes"
+  "grpcCouldNotGetRetakes": "Could not get retakes",
+  "grpcNoSuchGroup": "No such group"
 }

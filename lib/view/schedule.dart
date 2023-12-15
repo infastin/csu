@@ -43,7 +43,7 @@ class _ScheduleBody extends StatelessWidget {
       scaffoldMessenger.showSnackBar(
         SnackBar(
           content: Text(
-            "${e.providerCode.localize(loc)}: ${e.grpcCode.localize(loc)}",
+            e.localize(loc),
             style: textStyle.copyWith(
               color: colorScheme.onError,
               fontWeight: FontWeight.bold,
@@ -64,7 +64,7 @@ class _ScheduleBody extends StatelessWidget {
     getSchedule(context, false);
 
     late final Widget body;
-    if (cache.schedule != null) {
+    if (cache.schedule != null && cache.schedule!.isNotEmpty) {
       body = const _ScheduleBodyList();
     } else {
       body = const _ScheduleBodyNone();
