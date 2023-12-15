@@ -6,9 +6,9 @@ import 'package:system_theme/system_theme.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 
+import 'entity/entity.dart';
 import 'view/view.dart';
 import 'repo/repo.dart';
-import 'entity/entity.dart';
 
 typedef Localize = String Function(AppLocalizations loc);
 
@@ -178,7 +178,10 @@ class App extends StatelessWidget {
               schedule: schedule,
               retakes: retakes,
             )),
-            Provider(create: (_) => GrpcProvider()),
+            Provider(
+              create: (_) => GrpcProvider(),
+              dispose: (_, grpc) async => await grpc.close(),
+            ),
           ],
           builder: (context, child) => MaterialApp.router(
             theme: light,

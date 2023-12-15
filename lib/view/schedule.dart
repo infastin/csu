@@ -1,10 +1,10 @@
+import 'package:provider/provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../widgets/widgets.dart';
-import '../repo/data.dart' as data;
 import '../utils/utils.dart';
-import '../entity/entity.dart';
+import '../repo/repo.dart';
 
 class ScheduleView extends StatelessWidget {
   const ScheduleView({super.key});
@@ -14,39 +14,87 @@ class ScheduleView extends StatelessWidget {
     var loc = AppLocalizations.of(context)!;
     return Scaffold(
       appBar: AppBar(title: Text(loc.schedule)),
-      body: _ScheduleBody(),
+      body: const _ScheduleBody(),
     );
   }
 }
 
-class _ScheduleBody extends StatefulWidget {
-  _ScheduleBody({super.key});
+class _ScheduleBody extends StatelessWidget {
+  const _ScheduleBody({super.key});
 
-  final ScheduleEntity? schedule = ScheduleEntity(
-    oddWeek: data.oddDays,
-    evenWeek: data.evenDays
-  );
+  Future<void> getSchedule(BuildContext context, bool force) async {
+    var grpc = Provider.of<GrpcProvider>(context, listen: false);
+    var cache = Provider.of<CacheProvider>(context, listen: false);
+    var prefs = Provider.of<PreferencesProvider>(context, listen: false);
+    var loc = AppLocalizations.of(context)!;
+    var scaffoldMessenger = ScaffoldMessenger.of(context);
+    var theme = Theme.of(context);
+    var colorScheme = theme.colorScheme;
+    var textStyle = DefaultTextStyle.of(context).style;
 
-  // final ScheduleEntity? schedule = null;
+    if (cache.schedule != null && !force) {
+      return;
+    }
+
+    try {
+      var newSchedule = await grpc.getSchedule(prefs.group);
+      cache.setSchedule(newSchedule);
+    } on GrpcException catch (e) {
+      scaffoldMessenger.showSnackBar(
+        SnackBar(
+          content: Text(
+            "${e.providerCode.localize(loc)}: ${e.grpcCode.localize(loc)}",
+            style: textStyle.copyWith(
+              color: colorScheme.onError,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          backgroundColor: colorScheme.error,
+          showCloseIcon: true,
+          closeIconColor: colorScheme.onError,
+        )
+      );
+    }
+  }
 
   @override
-  State<_ScheduleBody> createState() => _ScheduleBodyState();
+  Widget build(BuildContext context) {
+    var cache = Provider.of<CacheProvider>(context);
+
+    getSchedule(context, false);
+
+    late final Widget body;
+    if (cache.schedule != null) {
+      body = const _ScheduleBodyList();
+    } else {
+      body = const _ScheduleBodyNone();
+    }
+
+    return RefreshIndicator(
+      onRefresh: () async => await getSchedule(context, true),
+      child: body,
+    );
+  }
 }
 
-class _ScheduleBodyState extends State<_ScheduleBody> {
+class _ScheduleBodyList extends StatefulWidget {
+  const _ScheduleBodyList({super.key});
+
+  @override
+  State<_ScheduleBodyList> createState() => _ScheduleBodyListState();
+}
+
+class _ScheduleBodyListState extends State<_ScheduleBodyList> {
   int _selectedWeek = DateTime.now().isoWeekNumber.isOdd ? 0 : 1;
 
   @override
   Widget build(BuildContext context) {
-    if (widget.schedule == null) {
-      return const _NoSchedule();
-    }
-
+    var cache = Provider.of<CacheProvider>(context);
     var theme = Theme.of(context);
     var textTheme = theme.textTheme;
     var colorScheme = theme.colorScheme;
     var loc = AppLocalizations.of(context)!;
-    var days = widget.schedule!.getWeek(_selectedWeek);
+    var days = cache.schedule!.getWeek(_selectedWeek);
 
     return ListView.builder(
       itemCount: days.length + 1,
@@ -88,10 +136,6 @@ class _ScheduleBodyState extends State<_ScheduleBody> {
           );
         }
 
-        if (days.isEmpty) {
-          return const _NoSchedule();
-        }
-
         var startDate = now.subtract(Duration(days: now.weekday));
         if (realWeek != _selectedWeek) {
           startDate = startDate.add(const Duration(days: 7));
@@ -106,8 +150,8 @@ class _ScheduleBodyState extends State<_ScheduleBody> {
   }
 }
 
-class _NoSchedule extends StatelessWidget {
-  const _NoSchedule({super.key});
+class _ScheduleBodyNone extends StatelessWidget {
+  const _ScheduleBodyNone({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -116,15 +160,21 @@ class _NoSchedule extends StatelessWidget {
     var colorScheme = theme.colorScheme;
     var loc = AppLocalizations.of(context)!;
 
-    return Container(
-      alignment: Alignment.center,
-      padding: const EdgeInsets.all(8),
-      child: Text(
-        loc.noSchedule,
-        style: textTheme.titleLarge?.copyWith(
-          color: colorScheme.onBackground.withOpacity(0.7),
+    return CustomScrollView(
+      slivers: [
+        SliverFillRemaining(
+          child: Container(
+            alignment: Alignment.center,
+            padding: const EdgeInsets.all(8),
+            child: Text(
+              loc.noSchedule,
+              style: textTheme.titleLarge?.copyWith(
+                color: colorScheme.onBackground.withOpacity(0.7),
+              )
+            ),
+          )
         )
-      ),
+      ],
     );
   }
 }

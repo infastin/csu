@@ -48,6 +48,7 @@ dependencies:
   json_annotation: ^4.8.1
   package_info_plus: ^4.2.0
   embed_annotation: ^1.2.0
+  after_layout: ^1.2.0
 
 dev_dependencies:
   json_serializable: ^6.7.1

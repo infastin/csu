@@ -25,16 +25,12 @@ enum SubjectType {
   }
 
   String localize(AppLocalizations loc) {
-    switch (this) {
-    case unknown:
-      return loc.unknown;
-    case lecture:
-      return loc.lecture;
-    case practice:
-      return loc.practice;
-    case lab:
-      return loc.lab;
-    }
+    return switch (this) {
+      unknown => loc.unknown,
+      lecture => loc.lecture,
+      practice => loc.practice,
+      lab => loc.lab,
+    };
   }
 }
 

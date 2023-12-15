@@ -1,7 +1,123 @@
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:grpc/grpc.dart';
 
 import '../grpc/csu.pbgrpc.dart' as pb;
 import '../entity/entity.dart';
+
+enum GrpcErrorCode {
+  ok(code: 0),
+  cancelled(code: 1),
+  unknown(code: 2),
+  invalidArgument(code: 3),
+  deadlineExceeded(code: 4),
+  notFound(code: 5),
+  alreadyExists(code: 6),
+  permissionDenied(code: 7),
+  resourceExhausted(code: 8),
+  failedPrecondition(code: 9),
+  aborted(code: 10),
+  outOfRange(code: 11),
+  unimplemented(code: 12),
+  internal(code: 13),
+  unavailable(code: 14),
+  dataLoss(code: 15),
+  unauthenticated(code: 16);
+
+  const GrpcErrorCode({required this.code});
+
+  factory GrpcErrorCode.fromCode(int code) {
+    return switch (code) {
+      0 => ok,
+      1 => cancelled,
+      2 => unknown,
+      3 => invalidArgument,
+      4 => deadlineExceeded,
+      5 => notFound,
+      6 => alreadyExists,
+      7 => permissionDenied,
+      8 => resourceExhausted,
+      9 => failedPrecondition,
+      10 => aborted,
+      11 => outOfRange,
+      12 => unimplemented,
+      13 => internal,
+      14 => unavailable,
+      15 => dataLoss,
+      16 => unauthenticated,
+      _ => unknown,
+    };
+  }
+
+  final int code;
+
+  String localize(AppLocalizations loc) {
+    return switch (this) {
+      ok => loc.grpcOk,
+      cancelled => loc.grpcCancelled,
+      unknown => loc.unknown,
+      invalidArgument => loc.grpcInvalidArgument,
+      deadlineExceeded => loc.grpcDeadlineExceeded,
+      notFound => loc.grpcNotFound,
+      alreadyExists => loc.grpcAlreadyExists,
+      permissionDenied => loc.grpcPermissionDenied,
+      resourceExhausted => loc.grpcResourceExhausted,
+      failedPrecondition => loc.grpcFailedPrecondition,
+      aborted => loc.grpcAborted,
+      outOfRange => loc.grpcOutOfRange,
+      unimplemented => loc.grpcUnimplemented,
+      internal => loc.grpcInternal,
+      unavailable => loc.grpcUnavailable,
+      dataLoss => loc.grpcDataLoss,
+      unauthenticated => loc.grpcUnauthenticated,
+    };
+  }
+}
+
+enum GrpcProviderErrorCode {
+  ok(code: 0),
+  unknown(code: 1),
+  couldNotGetSchedule(code: 2),
+  couldNotGetRetakes(code: 3);
+
+  const GrpcProviderErrorCode({required this.code});
+
+  factory GrpcProviderErrorCode.fromCode(int code) {
+    return switch (code) {
+      0 => ok,
+      1 => unknown,
+      2 => couldNotGetSchedule,
+      3 => couldNotGetRetakes,
+      _ => unknown,
+    };
+  }
+
+  final int code;
+
+  String localize(AppLocalizations loc) {
+    return switch (this) {
+      ok => loc.grpcOk,
+      unknown => loc.grpcUnknown,
+      couldNotGetSchedule => loc.grpcCouldNotGetSchedule,
+      couldNotGetRetakes => loc.grpcCouldNotGetRetakes,
+    };
+  }
+}
+
+class GrpcException implements Exception {
+  GrpcException({
+    required this.grpcCode,
+    required this.providerCode,
+    this.message,
+  });
+
+  final GrpcErrorCode grpcCode;
+  final GrpcProviderErrorCode providerCode;
+  final String? message;
+
+  @override
+  String toString() =>
+    "GRPC Exception (code: $grpcCode, providerCode: $providerCode, message: $message)";
+}
 
 class GrpcProvider {
   GrpcProvider() {
@@ -20,31 +136,39 @@ class GrpcProvider {
   late final ClientChannel _channel;
   late final pb.ServiceClient _stub;
 
-  Future<ScheduleEntity?> getSchedule(String group) async {
+  Future<ScheduleEntity> getSchedule(String group) async {
     try {
       final scheduleDTO = await _stub.getSchedule(
         pb.ScheduleRequest(group: group),
         options: CallOptions(compression: const GzipCodec())
       );
       return ScheduleEntity.fromPb(scheduleDTO);
-    } catch (_) {
-      return null;
+    } on GrpcError catch (e) {
+      throw GrpcException(
+        grpcCode: GrpcErrorCode.fromCode(e.code),
+        providerCode: GrpcProviderErrorCode.couldNotGetSchedule,
+        message: e.message,
+      );
     }
   }
 
-  Future<RetakesEntity?> getRetakes(String group) async {
+  Future<RetakesEntity> getRetakes(String group) async {
     try {
       final retakesDTO = await _stub.getRetakes(
         pb.RetakesRequest(group: group),
         options: CallOptions(compression: const GzipCodec())
       );
       return RetakesEntity.fromPb(retakesDTO);
-    } catch (_) {
-      return null;
+    } on GrpcError catch (e) {
+      throw GrpcException(
+        grpcCode: GrpcErrorCode.fromCode(e.code),
+        providerCode: GrpcProviderErrorCode.couldNotGetRetakes,
+        message: e.message,
+      );
     }
   }
 
   Future<void> close() async {
-    return await _channel.shutdown();
+    await _channel.shutdown();
   }
 }
