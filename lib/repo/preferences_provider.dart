@@ -22,14 +22,12 @@ class PreferencesProvider extends ChangeNotifier {
 
     _locale = locale;
     Preferences.setLocale(locale);
-
     notifyListeners();
   }
 
   void setGroup(String group) {
     _group = group;
     Preferences.setGroup(group);
-
     notifyListeners();
   }
 }

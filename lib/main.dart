@@ -1,4 +1,3 @@
-import 'package:csu/repo/app_info_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:adaptive_theme/adaptive_theme.dart';
@@ -9,6 +8,7 @@ import 'package:package_info_plus/package_info_plus.dart';
 
 import 'view/view.dart';
 import 'repo/repo.dart';
+import 'entity/entity.dart';
 
 typedef Localize = String Function(AppLocalizations loc);
 
@@ -37,7 +37,7 @@ var _routes = <_Route>[
     localize: (loc) => loc.retakes,
     location: "/retakes",
     icon: const Icon(Icons.accessible_forward),
-    selectedIcon:const Icon(Icons.accessible_forward),
+    selectedIcon: const Icon(Icons.accessible_forward),
   ),
   _Route(
     localize: (loc) => loc.other,
@@ -114,16 +114,22 @@ final _router = GoRouter(
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+
   await SystemTheme.accentColor.load();
   final savedThemeMode = await AdaptiveTheme.getThemeMode();
   final savedLocale = await Preferences.getLocale();
   final savedGroup = await Preferences.getGroup();
   final packageInfo = await PackageInfo.fromPlatform();
+  final schedule = await Cache.getSchedule();
+  final retakes = await Cache.getRetakes();
+
   runApp(App(
     savedThemeMode: savedThemeMode,
     savedLocale: savedLocale,
     savedGroup: savedGroup,
     packageInfo: packageInfo,
+    schedule: schedule,
+    retakes: retakes,
   ));
 }
 
@@ -133,13 +139,17 @@ class App extends StatelessWidget {
     required this.savedThemeMode,
     required this.savedLocale,
     required this.savedGroup,
-    required this.packageInfo
+    required this.packageInfo,
+    required this.schedule,
+    required this.retakes,
   });
 
   final AdaptiveThemeMode? savedThemeMode;
   final Locale? savedLocale;
   final String? savedGroup;
   final PackageInfo packageInfo;
+  final ScheduleEntity? schedule;
+  final RetakesEntity? retakes;
 
   // This widget is the root of your application.
   @override
@@ -157,24 +167,26 @@ class App extends StatelessWidget {
           useMaterial3: true,
         ),
         initial: savedThemeMode ?? AdaptiveThemeMode.system,
-        builder: (light, dark) => ChangeNotifierProvider<PreferencesProvider>(
-          create: (_) => PreferencesProvider(
-            locale: savedLocale ?? Preferences.getDefaultLocale(),
-            group: savedGroup ?? ""
+        builder: (light, dark) => MultiProvider(
+          providers: [
+            Provider(create: (_) => AppInfoProvider(packageInfo: packageInfo)),
+            ChangeNotifierProvider(create: (_) => PreferencesProvider(
+              locale: savedLocale ?? Preferences.getDefaultLocale(),
+              group: savedGroup ?? ""
+            )),
+            ChangeNotifierProvider(create: (_) => CacheProvider(
+              schedule: schedule,
+              retakes: retakes,
+            )),
+          ],
+          builder: (context, child) => MaterialApp.router(
+            theme: light,
+            darkTheme: dark,
+            routerConfig: _router,
+            locale: Provider.of<PreferencesProvider>(context).locale,
+            localizationsDelegates: AppLocalizations.localizationsDelegates,
+            supportedLocales: AppLocalizations.supportedLocales,
           ),
-          builder: (context, child) => Provider<AppInfoProvider>(
-            create: (_) => AppInfoProvider(
-              packageInfo: packageInfo
-            ),
-            builder: (context, child) => MaterialApp.router(
-              theme: light,
-              darkTheme: dark,
-              routerConfig: _router,
-              locale: Provider.of<PreferencesProvider>(context).locale,
-              localizationsDelegates: AppLocalizations.localizationsDelegates,
-              supportedLocales: AppLocalizations.supportedLocales,
-            )
-          )
         )
       )
     );
