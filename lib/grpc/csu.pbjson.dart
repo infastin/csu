@@ -13,6 +13,31 @@ import 'dart:convert' as $convert;
 import 'dart:core' as $core;
 import 'dart:typed_data' as $typed_data;
 
+@$core.Deprecated('Use timeTableResponseDescriptor instead')
+const TimeTableResponse$json = {
+  '1': 'TimeTableResponse',
+  '2': [
+    {'1': 'timetable', '3': 1, '4': 3, '5': 11, '6': '.schedule.TimeRange', '10': 'timetable'},
+  ],
+};
+
+/// Descriptor for `TimeTableResponse`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List timeTableResponseDescriptor = $convert.base64Decode(
+    'ChFUaW1lVGFibGVSZXNwb25zZRIxCgl0aW1ldGFibGUYASADKAsyEy5zY2hlZHVsZS5UaW1lUm'
+    'FuZ2VSCXRpbWV0YWJsZQ==');
+
+@$core.Deprecated('Use groupsResponseDescriptor instead')
+const GroupsResponse$json = {
+  '1': 'GroupsResponse',
+  '2': [
+    {'1': 'groups', '3': 1, '4': 3, '5': 9, '10': 'groups'},
+  ],
+};
+
+/// Descriptor for `GroupsResponse`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List groupsResponseDescriptor = $convert.base64Decode(
+    'Cg5Hcm91cHNSZXNwb25zZRIWCgZncm91cHMYASADKAlSBmdyb3Vwcw==');
+
 @$core.Deprecated('Use lecturerDescriptor instead')
 const Lecturer$json = {
   '1': 'Lecturer',

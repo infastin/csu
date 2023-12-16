@@ -5,54 +5,56 @@ import 'package:shared_preferences/shared_preferences.dart';
 import '../entity/entity.dart';
 
 class Cache {
-  static const String scheduleKey = "schedule";
-  static const String retakesKey = "retakes";
+  static const String _scheduleKey = "schedule";
+  static const String _retakesKey = "retakes";
+  static const String _groupsKey = "groups";
+  static const String _timetableKey = "timetable";
 
-  static Future<ScheduleEntity?> getSchedule() async {
+  static Future<T?> _getByKey<T>(String key, T Function(Map<String, dynamic>) fromJson) async {
     try {
       final prefs = await SharedPreferences.getInstance();
-      final scheduleStr = prefs.getString(scheduleKey);
+      final str = prefs.getString(key);
 
-      if (scheduleStr == null || scheduleStr.isEmpty) {
+      if (str == null || str.isEmpty) {
         return null;
       }
 
-      final scheduleJson = jsonDecode(scheduleStr);
+      final json = jsonDecode(str);
 
-      return ScheduleEntity.fromJson(scheduleJson);
+      return fromJson(json);
     } catch (_) {
       return null;
     }
   }
 
-  static Future<bool> setSchedule(ScheduleEntity schedule) async {
+  static Future<bool> _setWithKey(String key, Map<String, dynamic> Function() toJson) async {
     final prefs = await SharedPreferences.getInstance();
-    final scheduleJson = schedule.toJson();
-    final scheduleStr = jsonEncode(scheduleJson);
-    return prefs.setString(scheduleKey, scheduleStr);
+    final json = toJson();
+    final str = jsonEncode(json);
+    return prefs.setString(key, str);
   }
 
-  static Future<RetakesEntity?> getRetakes() async {
-    try {
-      final prefs = await SharedPreferences.getInstance();
-      final retakesStr = prefs.getString(retakesKey);
+  static Future<ScheduleEntity?> getSchedule() async =>
+    await _getByKey(_scheduleKey, ScheduleEntity.fromJson);
 
-      if (retakesStr == null || retakesStr.isEmpty) {
-        return null;
-      }
+  static Future<bool> setSchedule(ScheduleEntity schedule) async =>
+    await _setWithKey(_scheduleKey, schedule.toJson);
 
-      final retakesJson = jsonDecode(retakesStr);
+  static Future<RetakesEntity?> getRetakes() async =>
+    await _getByKey(_retakesKey, RetakesEntity.fromJson);
 
-      return RetakesEntity.fromJson(retakesJson);
-    } catch (_) {
-      return null;
-    }
-  }
+  static Future<bool> setRetakes(RetakesEntity retakes) async =>
+    await _setWithKey(_retakesKey, retakes.toJson);
 
-  static Future<bool> setRetakes(RetakesEntity retakes) async {
-    final prefs = await SharedPreferences.getInstance();
-    final retakesJson = retakes.toJson();
-    final retakesStr = jsonEncode(retakesJson);
-    return prefs.setString(retakesKey, retakesStr);
-  }
+  static Future<GroupsEntity?> getGroups() async =>
+    await _getByKey(_groupsKey, GroupsEntity.fromJson);
+
+  static Future<bool> setGroups(GroupsEntity groups) async =>
+    await _setWithKey(_groupsKey, groups.toJson);
+
+  static Future<TimeTableEntity?> getTimeTable() async =>
+    await _getByKey(_timetableKey, TimeTableEntity.fromJson);
+
+  static Future<bool> setTimeTable(TimeTableEntity timetable) async =>
+    await _setWithKey(_timetableKey, timetable.toJson);
 }

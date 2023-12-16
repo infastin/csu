@@ -23,6 +23,7 @@
   "ok": "OK",
   "noSchedule": "No schedule",
   "noRetakes": "No retakes",
+  "noTimeTable": "No timetable",
   "timetable": "Timetable",
   "info": "Info",
   "about": "About",
@@ -31,6 +32,7 @@
   "license": "License",
   "thirdPartyLicenses": "Third-Party Licenses",
   "sourceCode": "Source Code",
+  "groupNotSelected": "Group not selected",
   "grpcOk": "OK",
   "grpcCancelled": "Request cancelled",
   "grpcUnknown": "Unknown error",
@@ -50,5 +52,7 @@
   "grpcUnauthenticated": "Unauthenticated",
   "grpcCouldNotGetSchedule": "Could not get schedule",
   "grpcCouldNotGetRetakes": "Could not get retakes",
+  "grpcCouldNotGetGroups": "Could not get groups",
+  "grpcCouldNotGetTimeTable": "Could not get timetable",
   "grpcNoSuchGroup": "No such group"
 }

@@ -7,7 +7,8 @@ proto:
 		-Iprotos \
 		-I/usr/include/google/protobuf \
 		csu.proto \
-		google/protobuf/timestamp.proto
+		google/protobuf/timestamp.proto \
+		google/protobuf/empty.proto
 .PHONY: proto
 
 gen-loc:

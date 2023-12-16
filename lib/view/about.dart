@@ -5,7 +5,7 @@ class AboutView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var loc = AppLocalizations.of(context)!;
+    final loc = AppLocalizations.of(context)!;
     return Scaffold(
       appBar: AppBar(title: Text(loc.about)),
       body: const _AboutBody(),
@@ -18,8 +18,8 @@ class _AboutBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var loc = AppLocalizations.of(context)!;
-    var appInfo = Provider.of<AppInfoProvider>(context);
+    final loc = AppLocalizations.of(context)!;
+    final appInfo = Provider.of<AppInfoProvider>(context);
 
     return ListView(
       children: [

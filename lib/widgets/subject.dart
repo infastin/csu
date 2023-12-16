@@ -16,10 +16,10 @@ class SubjectWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var theme = Theme.of(context);
-    var textTheme = theme.textTheme;
-    var colorScheme = theme.colorScheme;
-    var loc = AppLocalizations.of(context)!;
+    final theme = Theme.of(context);
+    final textTheme = theme.textTheme;
+    final colorScheme = theme.colorScheme;
+    final loc = AppLocalizations.of(context)!;
 
     var room = subject.room;
     Uri? uri;

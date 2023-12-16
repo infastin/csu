@@ -16,6 +16,7 @@ import 'package:grpc/service_api.dart' as $grpc;
 import 'package:protobuf/protobuf.dart' as $pb;
 
 import 'csu.pb.dart' as $0;
+import 'google/protobuf/empty.pb.dart' as $1;
 
 export 'csu.pb.dart';
 
@@ -29,6 +30,14 @@ class ServiceClient extends $grpc.Client {
       '/schedule.Service/GetRetakes',
       ($0.RetakesRequest value) => value.writeToBuffer(),
       ($core.List<$core.int> value) => $0.RetakesResponse.fromBuffer(value));
+  static final _$getGroups = $grpc.ClientMethod<$1.Empty, $0.GroupsResponse>(
+      '/schedule.Service/GetGroups',
+      ($1.Empty value) => value.writeToBuffer(),
+      ($core.List<$core.int> value) => $0.GroupsResponse.fromBuffer(value));
+  static final _$getTimeTable = $grpc.ClientMethod<$1.Empty, $0.TimeTableResponse>(
+      '/schedule.Service/GetTimeTable',
+      ($1.Empty value) => value.writeToBuffer(),
+      ($core.List<$core.int> value) => $0.TimeTableResponse.fromBuffer(value));
 
   ServiceClient($grpc.ClientChannel channel,
       {$grpc.CallOptions? options,
@@ -42,6 +51,14 @@ class ServiceClient extends $grpc.Client {
 
   $grpc.ResponseFuture<$0.RetakesResponse> getRetakes($0.RetakesRequest request, {$grpc.CallOptions? options}) {
     return $createUnaryCall(_$getRetakes, request, options: options);
+  }
+
+  $grpc.ResponseFuture<$0.GroupsResponse> getGroups($1.Empty request, {$grpc.CallOptions? options}) {
+    return $createUnaryCall(_$getGroups, request, options: options);
+  }
+
+  $grpc.ResponseFuture<$0.TimeTableResponse> getTimeTable($1.Empty request, {$grpc.CallOptions? options}) {
+    return $createUnaryCall(_$getTimeTable, request, options: options);
   }
 }
 
@@ -64,6 +81,20 @@ abstract class ServiceBase extends $grpc.Service {
         false,
         ($core.List<$core.int> value) => $0.RetakesRequest.fromBuffer(value),
         ($0.RetakesResponse value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$1.Empty, $0.GroupsResponse>(
+        'GetGroups',
+        getGroups_Pre,
+        false,
+        false,
+        ($core.List<$core.int> value) => $1.Empty.fromBuffer(value),
+        ($0.GroupsResponse value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$1.Empty, $0.TimeTableResponse>(
+        'GetTimeTable',
+        getTimeTable_Pre,
+        false,
+        false,
+        ($core.List<$core.int> value) => $1.Empty.fromBuffer(value),
+        ($0.TimeTableResponse value) => value.writeToBuffer()));
   }
 
   $async.Future<$0.ScheduleResponse> getSchedule_Pre($grpc.ServiceCall call, $async.Future<$0.ScheduleRequest> request) async {
@@ -74,6 +105,16 @@ abstract class ServiceBase extends $grpc.Service {
     return getRetakes(call, await request);
   }
 
+  $async.Future<$0.GroupsResponse> getGroups_Pre($grpc.ServiceCall call, $async.Future<$1.Empty> request) async {
+    return getGroups(call, await request);
+  }
+
+  $async.Future<$0.TimeTableResponse> getTimeTable_Pre($grpc.ServiceCall call, $async.Future<$1.Empty> request) async {
+    return getTimeTable(call, await request);
+  }
+
   $async.Future<$0.ScheduleResponse> getSchedule($grpc.ServiceCall call, $0.ScheduleRequest request);
   $async.Future<$0.RetakesResponse> getRetakes($grpc.ServiceCall call, $0.RetakesRequest request);
+  $async.Future<$0.GroupsResponse> getGroups($grpc.ServiceCall call, $1.Empty request);
+  $async.Future<$0.TimeTableResponse> getTimeTable($grpc.ServiceCall call, $1.Empty request);
 }

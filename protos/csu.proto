@@ -1,6 +1,7 @@
 syntax = "proto3";
 
 import "google/protobuf/timestamp.proto";
+import "google/protobuf/empty.proto";
 
 option java_multiple_files = true;
 option java_package = "ru.csu.app";
@@ -12,6 +13,16 @@ package schedule;
 service Service {
   rpc GetSchedule(ScheduleRequest) returns (ScheduleResponse) {}
   rpc GetRetakes(RetakesRequest) returns (RetakesResponse) {}
+  rpc GetGroups(google.protobuf.Empty) returns (GroupsResponse) {}
+  rpc GetTimeTable(google.protobuf.Empty) returns (TimeTableResponse) {}
+}
+
+message TimeTableResponse {
+  repeated TimeRange timetable = 1;
+}
+
+message GroupsResponse {
+  repeated string groups = 1;
 }
 
 message Lecturer {

@@ -14,9 +14,97 @@ import 'dart:core' as $core;
 import 'package:protobuf/protobuf.dart' as $pb;
 
 import 'csu.pbenum.dart';
-import 'google/protobuf/timestamp.pb.dart' as $1;
+import 'google/protobuf/timestamp.pb.dart' as $2;
 
 export 'csu.pbenum.dart';
+
+class TimeTableResponse extends $pb.GeneratedMessage {
+  factory TimeTableResponse({
+    $core.Iterable<TimeRange>? timetable,
+  }) {
+    final $result = create();
+    if (timetable != null) {
+      $result.timetable.addAll(timetable);
+    }
+    return $result;
+  }
+  TimeTableResponse._() : super();
+  factory TimeTableResponse.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory TimeTableResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'TimeTableResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'schedule'), createEmptyInstance: create)
+    ..pc<TimeRange>(1, _omitFieldNames ? '' : 'timetable', $pb.PbFieldType.PM, subBuilder: TimeRange.create)
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  TimeTableResponse clone() => TimeTableResponse()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  TimeTableResponse copyWith(void Function(TimeTableResponse) updates) => super.copyWith((message) => updates(message as TimeTableResponse)) as TimeTableResponse;
+
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static TimeTableResponse create() => TimeTableResponse._();
+  TimeTableResponse createEmptyInstance() => create();
+  static $pb.PbList<TimeTableResponse> createRepeated() => $pb.PbList<TimeTableResponse>();
+  @$core.pragma('dart2js:noInline')
+  static TimeTableResponse getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<TimeTableResponse>(create);
+  static TimeTableResponse? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.List<TimeRange> get timetable => $_getList(0);
+}
+
+class GroupsResponse extends $pb.GeneratedMessage {
+  factory GroupsResponse({
+    $core.Iterable<$core.String>? groups,
+  }) {
+    final $result = create();
+    if (groups != null) {
+      $result.groups.addAll(groups);
+    }
+    return $result;
+  }
+  GroupsResponse._() : super();
+  factory GroupsResponse.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory GroupsResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'GroupsResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'schedule'), createEmptyInstance: create)
+    ..pPS(1, _omitFieldNames ? '' : 'groups')
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  GroupsResponse clone() => GroupsResponse()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  GroupsResponse copyWith(void Function(GroupsResponse) updates) => super.copyWith((message) => updates(message as GroupsResponse)) as GroupsResponse;
+
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static GroupsResponse create() => GroupsResponse._();
+  GroupsResponse createEmptyInstance() => create();
+  static $pb.PbList<GroupsResponse> createRepeated() => $pb.PbList<GroupsResponse>();
+  @$core.pragma('dart2js:noInline')
+  static GroupsResponse getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<GroupsResponse>(create);
+  static GroupsResponse? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.List<$core.String> get groups => $_getList(0);
+}
 
 class Lecturer extends $pb.GeneratedMessage {
   factory Lecturer({
@@ -519,7 +607,7 @@ class Retake extends $pb.GeneratedMessage {
     Lecturer? lecturer,
     $core.int? number,
     TimeRange? timeRange,
-    $1.Timestamp? date,
+    $2.Timestamp? date,
   }) {
     final $result = create();
     if (name != null) {
@@ -552,7 +640,7 @@ class Retake extends $pb.GeneratedMessage {
     ..aOM<Lecturer>(3, _omitFieldNames ? '' : 'lecturer', subBuilder: Lecturer.create)
     ..a<$core.int>(4, _omitFieldNames ? '' : 'number', $pb.PbFieldType.O3)
     ..aOM<TimeRange>(5, _omitFieldNames ? '' : 'timeRange', protoName: 'timeRange', subBuilder: TimeRange.create)
-    ..aOM<$1.Timestamp>(6, _omitFieldNames ? '' : 'date', subBuilder: $1.Timestamp.create)
+    ..aOM<$2.Timestamp>(6, _omitFieldNames ? '' : 'date', subBuilder: $2.Timestamp.create)
     ..hasRequiredFields = false
   ;
 
@@ -627,15 +715,15 @@ class Retake extends $pb.GeneratedMessage {
   TimeRange ensureTimeRange() => $_ensure(4);
 
   @$pb.TagNumber(6)
-  $1.Timestamp get date => $_getN(5);
+  $2.Timestamp get date => $_getN(5);
   @$pb.TagNumber(6)
-  set date($1.Timestamp v) { setField(6, v); }
+  set date($2.Timestamp v) { setField(6, v); }
   @$pb.TagNumber(6)
   $core.bool hasDate() => $_has(5);
   @$pb.TagNumber(6)
   void clearDate() => clearField(6);
   @$pb.TagNumber(6)
-  $1.Timestamp ensureDate() => $_ensure(5);
+  $2.Timestamp ensureDate() => $_ensure(5);
 }
 
 class RetakesRequest extends $pb.GeneratedMessage {

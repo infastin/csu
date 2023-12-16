@@ -11,7 +11,7 @@ class ScheduleView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var loc = AppLocalizations.of(context)!;
+    final loc = AppLocalizations.of(context)!;
     return Scaffold(
       appBar: AppBar(title: Text(loc.schedule)),
       body: const _ScheduleBody(),
@@ -22,46 +22,39 @@ class ScheduleView extends StatelessWidget {
 class _ScheduleBody extends StatelessWidget {
   const _ScheduleBody({super.key});
 
-  Future<void> getSchedule(BuildContext context, bool force) async {
-    var grpc = Provider.of<GrpcProvider>(context, listen: false);
-    var cache = Provider.of<CacheProvider>(context, listen: false);
-    var prefs = Provider.of<PreferencesProvider>(context, listen: false);
-    var loc = AppLocalizations.of(context)!;
-    var scaffoldMessenger = ScaffoldMessenger.of(context);
-    var theme = Theme.of(context);
-    var colorScheme = theme.colorScheme;
-    var textStyle = DefaultTextStyle.of(context).style;
+  Future<void> updateSchedule(BuildContext context, bool force) async {
+    final grpc = Provider.of<GrpcProvider>(context, listen: false);
+    final cache = Provider.of<CacheProvider>(context, listen: false);
+    final prefs = Provider.of<PreferencesProvider>(context, listen: false);
+    final loc = AppLocalizations.of(context)!;
+    final scaffoldMessenger = ScaffoldMessenger.of(context);
+    final theme = Theme.of(context);
+    final colorScheme = theme.colorScheme;
+    final textStyle = DefaultTextStyle.of(context).style;
 
     if (cache.schedule != null && !force) {
       return;
     }
 
     try {
-      var newSchedule = await grpc.getSchedule(prefs.group);
+      final newSchedule = await grpc.getSchedule(prefs.group);
       cache.setSchedule(newSchedule);
     } on GrpcException catch (e) {
       scaffoldMessenger.showSnackBar(
-        SnackBar(
-          content: Text(
-            e.localize(loc),
-            style: textStyle.copyWith(
-              color: colorScheme.onError,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-          backgroundColor: colorScheme.error,
-          showCloseIcon: true,
-          closeIconColor: colorScheme.onError,
-        )
+        ErrorSnackBar.create(
+          message: e.localize(loc),
+          colorScheme: colorScheme,
+          textStyle: textStyle
+        ),
       );
     }
   }
 
   @override
   Widget build(BuildContext context) {
-    var cache = Provider.of<CacheProvider>(context);
+    final cache = Provider.of<CacheProvider>(context);
 
-    getSchedule(context, false);
+    updateSchedule(context, false);
 
     late final Widget body;
     if (cache.schedule != null && cache.schedule!.isNotEmpty) {
@@ -71,8 +64,8 @@ class _ScheduleBody extends StatelessWidget {
     }
 
     return RefreshIndicator(
-      onRefresh: () async => await getSchedule(context, true),
       child: body,
+      onRefresh: () async => await updateSchedule(context, true),
     );
   }
 }
@@ -89,21 +82,21 @@ class _ScheduleBodyListState extends State<_ScheduleBodyList> {
 
   @override
   Widget build(BuildContext context) {
-    var cache = Provider.of<CacheProvider>(context);
-    var theme = Theme.of(context);
-    var textTheme = theme.textTheme;
-    var colorScheme = theme.colorScheme;
-    var loc = AppLocalizations.of(context)!;
-    var days = cache.schedule!.getWeek(_selectedWeek);
+    final cache = Provider.of<CacheProvider>(context);
+    final theme = Theme.of(context);
+    final textTheme = theme.textTheme;
+    final colorScheme = theme.colorScheme;
+    final loc = AppLocalizations.of(context)!;
+    final days = cache.schedule!.getWeek(_selectedWeek);
 
     return ListView.builder(
       itemCount: days.length + 1,
       itemBuilder: (context, index) {
-        var now = DateTime.now();
-        var realWeek = now.isoWeekNumber.isOdd ? 0 : 1;
+        final now = DateTime.now();
+        final realWeek = now.isoWeekNumber.isOdd ? 0 : 1;
 
         if (index == 0) {
-          var labels = [loc.odd, loc.even];
+          final labels = [loc.odd, loc.even];
           labels[realWeek] += " (${loc.current})";
 
           return Padding(
@@ -155,10 +148,10 @@ class _ScheduleBodyNone extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var theme = Theme.of(context);
-    var textTheme = theme.textTheme;
-    var colorScheme = theme.colorScheme;
-    var loc = AppLocalizations.of(context)!;
+    final theme = Theme.of(context);
+    final textTheme = theme.textTheme;
+    final colorScheme = theme.colorScheme;
+    final loc = AppLocalizations.of(context)!;
 
     return CustomScrollView(
       slivers: [

@@ -9,11 +9,9 @@ class Preferences {
 
   static Locale getDefaultLocale() {
     var locale = Locale(Intl.shortLocale(Intl.getCurrentLocale()));
-
     if (!AppLocalizations.supportedLocales.contains(locale)) {
       locale = const Locale("en");
     }
-
     return locale;
   }
 

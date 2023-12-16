@@ -1,3 +1,4 @@
+import 'package:csu/grpc/google/protobuf/empty.pb.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:grpc/grpc.dart';
 
@@ -77,7 +78,9 @@ enum GrpcProviderErrorCode {
   ok(code: 0),
   unknown(code: 1),
   couldNotGetSchedule(code: 2),
-  couldNotGetRetakes(code: 3);
+  couldNotGetRetakes(code: 3),
+  couldNotGetGroups(code: 4),
+  couldNotGetTimeTable(code: 5);
 
   const GrpcProviderErrorCode({required this.code});
 
@@ -87,6 +90,8 @@ enum GrpcProviderErrorCode {
       1 => unknown,
       2 => couldNotGetSchedule,
       3 => couldNotGetRetakes,
+      4 => couldNotGetGroups,
+      5 => couldNotGetTimeTable,
       _ => unknown,
     };
   }
@@ -99,6 +104,8 @@ enum GrpcProviderErrorCode {
       unknown => loc.grpcUnknown,
       couldNotGetSchedule => loc.grpcCouldNotGetSchedule,
       couldNotGetRetakes => loc.grpcCouldNotGetRetakes,
+      couldNotGetGroups => loc.grpcCouldNotGetGroups,
+      couldNotGetTimeTable => loc.grpcCouldNotGetTimeTable,
     };
   }
 }
@@ -145,7 +152,7 @@ class GrpcException implements Exception {
     "GRPC Exception (code: $grpcCode, providerCode: $providerCode, message: $message)";
 
   String localize(AppLocalizations loc) {
-    if (message == GrpcErrorMessage.none || message == GrpcErrorMessage.none) {
+    if (message == GrpcErrorMessage.none || message == GrpcErrorMessage.unknown) {
       return "${providerCode.localize(loc)}: ${grpcCode.localize(loc)}";
     } else {
       return "${providerCode.localize(loc)}: ${message.localize(loc)}";
@@ -197,6 +204,38 @@ class GrpcProvider {
       throw GrpcException(
         grpcCode: GrpcErrorCode.fromCode(e.code),
         providerCode: GrpcProviderErrorCode.couldNotGetRetakes,
+        message: GrpcErrorMessage.fromMessage(e.message),
+      );
+    }
+  }
+
+  Future<GroupsEntity> getGroups() async {
+    try {
+      final groupsDTO = await _stub.getGroups(
+        Empty(),
+        options: CallOptions(compression: const GzipCodec())
+      );
+      return GroupsEntity.fromPb(groupsDTO);
+    } on GrpcError catch (e) {
+      throw GrpcException(
+        grpcCode: GrpcErrorCode.fromCode(e.code),
+        providerCode: GrpcProviderErrorCode.couldNotGetGroups,
+        message: GrpcErrorMessage.fromMessage(e.message),
+      );
+    }
+  }
+
+  Future<TimeTableEntity> getTimeTable() async {
+    try {
+      final timetableDTO = await _stub.getTimeTable(
+        Empty(),
+        options: CallOptions(compression: const GzipCodec())
+      );
+      return TimeTableEntity.fromPb(timetableDTO);
+    } on GrpcError catch (e) {
+      throw GrpcException(
+        grpcCode: GrpcErrorCode.fromCode(e.code),
+        providerCode: GrpcProviderErrorCode.couldNotGetTimeTable,
         message: GrpcErrorMessage.fromMessage(e.message),
       );
     }

@@ -10,7 +10,7 @@ class RetakesView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var loc = AppLocalizations.of(context)!;
+    final loc = AppLocalizations.of(context)!;
     return Scaffold(
       appBar: AppBar(title: Text(loc.retakes)),
       body: const _RetakesBody(),
@@ -21,46 +21,39 @@ class RetakesView extends StatelessWidget {
 class _RetakesBody extends StatelessWidget {
   const _RetakesBody({super.key});
 
-  Future<void> getRetakes(BuildContext context, bool force) async {
-    var grpc = Provider.of<GrpcProvider>(context, listen: false);
-    var cache = Provider.of<CacheProvider>(context, listen: false);
-    var prefs = Provider.of<PreferencesProvider>(context, listen: false);
-    var loc = AppLocalizations.of(context)!;
-    var scaffoldMessenger = ScaffoldMessenger.of(context);
-    var theme = Theme.of(context);
-    var colorScheme = theme.colorScheme;
-    var textStyle = DefaultTextStyle.of(context).style;
+  Future<void> updateRetakes(BuildContext context, bool force) async {
+    final grpc = Provider.of<GrpcProvider>(context, listen: false);
+    final cache = Provider.of<CacheProvider>(context, listen: false);
+    final prefs = Provider.of<PreferencesProvider>(context, listen: false);
+    final loc = AppLocalizations.of(context)!;
+    final scaffoldMessenger = ScaffoldMessenger.of(context);
+    final theme = Theme.of(context);
+    final colorScheme = theme.colorScheme;
+    final textStyle = DefaultTextStyle.of(context).style;
 
     if (cache.retakes != null && !force) {
       return;
     }
 
     try {
-      var newRetakes = await grpc.getRetakes(prefs.group);
+      final newRetakes = await grpc.getRetakes(prefs.group);
       cache.setRetakes(newRetakes);
     } on GrpcException catch (e) {
       scaffoldMessenger.showSnackBar(
-        SnackBar(
-          content: Text(
-            e.localize(loc),
-            style: textStyle.copyWith(
-              color: colorScheme.onError,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-          backgroundColor: colorScheme.error,
-          showCloseIcon: true,
-          closeIconColor: colorScheme.onError,
-        )
+        ErrorSnackBar.create(
+          message: e.localize(loc),
+          colorScheme: colorScheme,
+          textStyle: textStyle
+        ),
       );
     }
   }
 
   @override
   Widget build(BuildContext context) {
-    var cache = Provider.of<CacheProvider>(context);
+    final cache = Provider.of<CacheProvider>(context);
 
-    getRetakes(context, false);
+    updateRetakes(context, false);
 
     late final Widget body;
     if (cache.retakes != null && cache.retakes!.isNotEmpty) {
@@ -70,8 +63,8 @@ class _RetakesBody extends StatelessWidget {
     }
 
     return RefreshIndicator(
-      onRefresh: () async => await getRetakes(context, true),
       child: body,
+      onRefresh: () async => await updateRetakes(context, true),
     );
   }
 }
@@ -81,7 +74,7 @@ class _RetakesBodyList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var cache = Provider.of<CacheProvider>(context);
+    final cache = Provider.of<CacheProvider>(context);
 
     return ListView.builder(
       itemCount: cache.retakes!.retakes.length,
@@ -98,10 +91,10 @@ class _RetakesBodyNone extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var theme = Theme.of(context);
-    var textTheme = theme.textTheme;
-    var colorScheme = theme.colorScheme;
-    var loc = AppLocalizations.of(context)!;
+    final theme = Theme.of(context);
+    final textTheme = theme.textTheme;
+    final colorScheme = theme.colorScheme;
+    final loc = AppLocalizations.of(context)!;
 
     return CustomScrollView(
       slivers: [

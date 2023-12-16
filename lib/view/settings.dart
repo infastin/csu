@@ -5,7 +5,7 @@ class SettingsView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var loc = AppLocalizations.of(context)!;
+    final loc = AppLocalizations.of(context)!;
     return Scaffold(
       appBar: AppBar(title: Text(loc.settings)),
       body: const _SettingsBody(),
@@ -18,17 +18,17 @@ class _SettingsBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var loc = AppLocalizations.of(context)!;
-    var adaptiveTheme = AdaptiveTheme.of(context);
-    var prefProvider = Provider.of<PreferencesProvider>(context);
+    final loc = AppLocalizations.of(context)!;
+    final adaptiveTheme = AdaptiveTheme.of(context);
+    final prefProvider = Provider.of<PreferencesProvider>(context);
 
-    var themesMap = {
+    final themesMap = {
       AdaptiveThemeMode.system: loc.systemTheme,
       AdaptiveThemeMode.light: loc.lightTheme,
       AdaptiveThemeMode.dark: loc.darkTheme,
     };
 
-    var languagesMap = {
+    final languagesMap = {
       const Locale("ru"): "Русский",
       const Locale("en"): "English",
     };
@@ -100,8 +100,8 @@ class _SettingsSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var theme = Theme.of(context);
-    var textTheme = theme.textTheme;
+    final theme = Theme.of(context);
+    final textTheme = theme.textTheme;
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -151,10 +151,10 @@ class _ThemeDialog extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var adaptiveTheme = AdaptiveTheme.of(context);
-    var loc = AppLocalizations.of(context)!;
+    final adaptiveTheme = AdaptiveTheme.of(context);
+    final loc = AppLocalizations.of(context)!;
 
-    var themes = [
+    final themes = [
       (loc.systemTheme, AdaptiveThemeMode.system),
       (loc.lightTheme, AdaptiveThemeMode.light),
       (loc.darkTheme, AdaptiveThemeMode.dark),
@@ -182,8 +182,8 @@ class _LanguageDialog extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var loc = AppLocalizations.of(context)!;
-    var prefProvider = Provider.of<PreferencesProvider>(context);
+    final loc = AppLocalizations.of(context)!;
+    final prefProvider = Provider.of<PreferencesProvider>(context);
 
     const locales = [
       ("English", Locale("en")),
@@ -216,16 +216,31 @@ class _GroupDialog extends StatefulWidget {
 
 class _GroupDialogState extends State<_GroupDialog> {
   final _formKey = GlobalKey<FormState>();
-  final controller = TextEditingController();
+  final _groupDropdownKey = GlobalKey<DropdownSearchState<String>>();
+  String? _errorMsg;
+
+  Future<bool> updateGroups(BuildContext context) async {
+    final grpc = Provider.of<GrpcProvider>(context, listen: false);
+    final cache = Provider.of<CacheProvider>(context, listen: false);
+    final loc = AppLocalizations.of(context)!;
+
+    try {
+      final newGroups = await grpc.getGroups();
+      cache.setGroups(newGroups);
+      return true;
+    } on GrpcException catch (e) {
+      setState(() {
+        _errorMsg = e.localize(loc);
+      });
+      return false;
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
-    var loc = AppLocalizations.of(context)!;
-    var prefProvider = Provider.of<PreferencesProvider>(context);
-
-    if (prefProvider.group.isNotEmpty) {
-      controller.text = prefProvider.group;
-    }
+    final loc = AppLocalizations.of(context)!;
+    final prefs = Provider.of<PreferencesProvider>(context);
+    final cache = Provider.of<CacheProvider>(context);
 
     return SimpleDialog(
       title: Text(loc.group),
@@ -236,13 +251,25 @@ class _GroupDialogState extends State<_GroupDialog> {
             children: [
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
-                child: TextFormField(
-                  decoration: InputDecoration(
-                    border: const OutlineInputBorder(),
-                    label: Text(loc.group),
+                child: DropdownSearch<String>(
+                  key: _groupDropdownKey,
+                  items: cache.groups != null ? cache.groups!.groups : [],
+                  popupProps: const PopupProps.menu(
+                    showSearchBox: true,
+                    showSelectedItems: true,
                   ),
-                  controller: controller,
-                )
+                  dropdownDecoratorProps: DropDownDecoratorProps(
+                    dropdownSearchDecoration: InputDecoration(
+                      border: const OutlineInputBorder(),
+                      label: Text(loc.group),
+                      errorText: _errorMsg,
+                      errorMaxLines: 2,
+                    )
+                  ),
+                  onBeforePopupOpening: (_) async => await updateGroups(context),
+                  selectedItem: prefs.group.isNotEmpty ? prefs.group : null,
+                  validator: (value) => value == null ? loc.groupNotSelected : null,
+                ),
               ),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
@@ -258,7 +285,7 @@ class _GroupDialogState extends State<_GroupDialog> {
                       child: Text(loc.ok),
                       onPressed: () {
                         if (_formKey.currentState!.validate()) {
-                          prefProvider.setGroup(controller.text);
+                          prefs.setGroup(_groupDropdownKey.currentState!.getSelectedItem!);
                           Navigator.of(context).pop();
                         }
                       }

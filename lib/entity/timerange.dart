@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 import '../grpc/csu.pbgrpc.dart' as pb;
-
 import 'timeofday.dart';
 
 part 'timerange.g.dart';

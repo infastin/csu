@@ -20,10 +20,10 @@ class RetakeWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var theme = Theme.of(context);
-    var textTheme = theme.textTheme;
-    var prefProvider = Provider.of<PreferencesProvider>(context);
-    var dateFormat = DateFormat("EEEE, d MMM y", prefProvider.locale.toString());
+    final theme = Theme.of(context);
+    final textTheme = theme.textTheme;
+    final prefProvider = Provider.of<PreferencesProvider>(context);
+    final dateFormat = DateFormat("EEEE, d MMM y", prefProvider.locale.toString());
 
     var dateTheme = textTheme.titleMedium;
     if (DateTime.now().dateOnly() == retake.date.dateOnly()) {
@@ -67,9 +67,9 @@ class _RetakeBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var theme = Theme.of(context);
-    var textTheme = theme.textTheme;
-    var colorScheme = theme.colorScheme;
+    final theme = Theme.of(context);
+    final textTheme = theme.textTheme;
+    final colorScheme = theme.colorScheme;
 
     var room = retake.room;
     Uri? uri;

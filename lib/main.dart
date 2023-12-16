@@ -26,7 +26,7 @@ class _Route {
   final String location;
 }
 
-var _routes = <_Route>[
+final _routes = <_Route>[
   _Route(
     localize: (loc) => loc.schedule,
     location: "/schedule",
@@ -122,6 +122,7 @@ void main() async {
   final packageInfo = await PackageInfo.fromPlatform();
   final schedule = await Cache.getSchedule();
   final retakes = await Cache.getRetakes();
+  final groups = await Cache.getGroups();
 
   runApp(App(
     savedThemeMode: savedThemeMode,
@@ -130,6 +131,7 @@ void main() async {
     packageInfo: packageInfo,
     schedule: schedule,
     retakes: retakes,
+    groups: groups,
   ));
 }
 
@@ -142,6 +144,7 @@ class App extends StatelessWidget {
     required this.packageInfo,
     required this.schedule,
     required this.retakes,
+    required this.groups,
   });
 
   final AdaptiveThemeMode? savedThemeMode;
@@ -150,6 +153,7 @@ class App extends StatelessWidget {
   final PackageInfo packageInfo;
   final ScheduleEntity? schedule;
   final RetakesEntity? retakes;
+  final GroupsEntity? groups;
 
   // This widget is the root of your application.
   @override
@@ -177,6 +181,7 @@ class App extends StatelessWidget {
             ChangeNotifierProvider(create: (_) => CacheProvider(
               schedule: schedule,
               retakes: retakes,
+              groups: groups,
             )),
             Provider(
               create: (_) => GrpcProvider(),
@@ -209,9 +214,9 @@ class AppScaffold extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var location = state.uri.toString();
-    var currentRouteIdx = _locationIndices[location]!;
-    var loc = AppLocalizations.of(context)!;
+    final location = state.uri.toString();
+    final currentRouteIdx = _locationIndices[location]!;
+    final loc = AppLocalizations.of(context)!;
 
     return Scaffold(
       body: child,

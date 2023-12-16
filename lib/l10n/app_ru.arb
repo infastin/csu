@@ -23,6 +23,7 @@
   "ok": "ОК",
   "noSchedule": "Расписания нет",
   "noRetakes": "Пересдач нет",
+  "noTimeTable": "Графика нет",
   "timetable": "График",
   "info": "Информация",
   "about": "О приложении",
@@ -31,6 +32,7 @@
   "license": "Лицензия",
   "thirdPartyLicenses": "Сторонние лицензии",
   "sourceCode": "Исходный код",
+  "groupNotSelected": "Группа не выбрана",
   "grpcOk": "ОК",
   "grpcCancelled": "Запрос отменен",
   "grpcUnknown": "Неизвестная ошибка",
@@ -50,5 +52,7 @@
   "grpcUnauthenticated": "Неавторизован",
   "grpcCouldNotGetSchedule": "Не удалось получить расписание",
   "grpcCouldNotGetRetakes": "Не удалось получить список пересдач",
+  "grpcCouldNotGetGroups": "Не удалось получить список групп",
+  "grpcCouldNotGetTimeTable": "Не удалось получить график",
   "grpcNoSuchGroup": "Нет такой группы"
 }

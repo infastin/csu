@@ -7,3 +7,5 @@ export 'retake.dart';
 export 'retakes.dart';
 export 'appinfo.dart';
 export 'config.dart';
+export 'groups.dart';
+export 'timetable.dart';

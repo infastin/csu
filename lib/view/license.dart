@@ -5,7 +5,7 @@ class LicenseView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var loc = AppLocalizations.of(context)!;
+    final loc = AppLocalizations.of(context)!;
     return Scaffold(
       appBar: AppBar(title: Text(loc.license)),
       body: const _LicenseBody(),
@@ -18,9 +18,9 @@ class _LicenseBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var appInfo = Provider.of<AppInfoProvider>(context);
-    var theme = Theme.of(context);
-    var textTheme = theme.textTheme;
+    final appInfo = Provider.of<AppInfoProvider>(context);
+    final theme = Theme.of(context);
+    final textTheme = theme.textTheme;
 
     return ListView(
       children: [

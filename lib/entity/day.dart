@@ -1,7 +1,6 @@
 import 'package:json_annotation/json_annotation.dart';
 
 import '../grpc/csu.pbgrpc.dart' as pb;
-
 import 'subject.dart';
 
 part 'day.g.dart';
