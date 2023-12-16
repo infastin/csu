@@ -253,7 +253,7 @@ class _GroupDialogState extends State<_GroupDialog> {
                 padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
                 child: DropdownSearch<String>(
                   key: _groupDropdownKey,
-                  items: cache.groups != null ? cache.groups!.groups : [],
+                  asyncItems: (_) async => cache.groups != null ? cache.groups!.groups : [],
                   popupProps: const PopupProps.menu(
                     showSearchBox: true,
                     showSelectedItems: true,

@@ -123,6 +123,7 @@ void main() async {
   final schedule = await Cache.getSchedule();
   final retakes = await Cache.getRetakes();
   final groups = await Cache.getGroups();
+  final timetable = await Cache.getTimeTable();
 
   runApp(App(
     savedThemeMode: savedThemeMode,
@@ -132,6 +133,7 @@ void main() async {
     schedule: schedule,
     retakes: retakes,
     groups: groups,
+    timetable: timetable,
   ));
 }
 
@@ -145,6 +147,7 @@ class App extends StatelessWidget {
     required this.schedule,
     required this.retakes,
     required this.groups,
+    required this.timetable,
   });
 
   final AdaptiveThemeMode? savedThemeMode;
@@ -154,6 +157,7 @@ class App extends StatelessWidget {
   final ScheduleEntity? schedule;
   final RetakesEntity? retakes;
   final GroupsEntity? groups;
+  final TimeTableEntity? timetable;
 
   // This widget is the root of your application.
   @override
@@ -182,6 +186,7 @@ class App extends StatelessWidget {
               schedule: schedule,
               retakes: retakes,
               groups: groups,
+              timetable: timetable,
             )),
             Provider(
               create: (_) => GrpcProvider(),

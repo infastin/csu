@@ -31,7 +31,7 @@ class _RetakesBody extends StatelessWidget {
     final colorScheme = theme.colorScheme;
     final textStyle = DefaultTextStyle.of(context).style;
 
-    if (cache.retakes != null && !force) {
+    if (prefs.group.isEmpty || (cache.retakes != null && !force)) {
       return;
     }
 

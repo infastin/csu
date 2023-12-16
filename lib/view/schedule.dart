@@ -32,7 +32,7 @@ class _ScheduleBody extends StatelessWidget {
     final colorScheme = theme.colorScheme;
     final textStyle = DefaultTextStyle.of(context).style;
 
-    if (cache.schedule != null && !force) {
+    if (prefs.group.isEmpty || (cache.schedule != null && !force)) {
       return;
     }
 

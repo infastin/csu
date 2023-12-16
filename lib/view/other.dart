@@ -14,8 +14,27 @@ part 'timetable.dart';
 part 'about.dart';
 part 'license.dart';
 
-class OtherView extends StatelessWidget {
+class OtherView extends StatefulWidget {
   const OtherView({super.key});
+
+  @override
+  State<OtherView> createState() => _OtherViewState();
+}
+
+class _OtherViewState extends State<OtherView> with TickerProviderStateMixin {
+  late final TabController _tabController;
+
+  @override
+  void initState() {
+    super.initState();
+    _tabController = TabController(length: 2, vsync: this);
+  }
+
+  @override
+  void dispose() {
+    _tabController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -26,24 +45,17 @@ class OtherView extends StatelessWidget {
       (loc.settings, const _SettingsBody()),
     ];
 
-    return DefaultTabController(
-      length: tabs.length,
-      child: Scaffold(
-        appBar: AppBar(
-          title: Text(loc.other),
-          bottom: TabBar(
-            tabs: [
-              for (final tab in tabs) Tab(
-                text: tab.$1,
-              )
-            ],
-          ),
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(loc.other),
+        bottom: TabBar(
+          controller: _tabController,
+          tabs: tabs.map((e) => Tab(text: e.$1)).toList()
         ),
-        body: TabBarView(
-          children: [
-            for (final tab in tabs) tab.$2
-          ],
-        ),
+      ),
+      body: TabBarView(
+        controller: _tabController,
+        children: tabs.map((e) => e.$2).toList()
       ),
     );
   }
