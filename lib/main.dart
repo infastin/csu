@@ -41,7 +41,7 @@ final _routes = <_Route>[
   ),
   _Route(
     localize: (loc) => loc.other,
-    location: "/other",
+    location: "/timetable",
     icon: const Icon(Icons.list),
     selectedIcon: const Icon(Icons.list),
   ),
@@ -50,9 +50,10 @@ final _routes = <_Route>[
 const _locationIndices = {
   "/schedule": 0,
   "/retakes": 1,
-  "/other": 2,
-  "/other/about": 2,
-  "/other/about/license": 2,
+  "/timetable": 2,
+  "/settings": 2,
+  "/settings/about": 2,
+  "/settings/about/license": 2,
 };
 
 final _rootNavigatorKey = GlobalKey<NavigatorState>();
@@ -83,10 +84,17 @@ final _router = GoRouter(
           ),
         ),
         GoRoute(
-          path: "/other",
+          path: "/timetable",
           pageBuilder: (context, state) => MaterialPage(
             key: state.pageKey,
-            child: const OtherView(),
+            child: const OtherView(initialIndex: 0),
+          ),
+        ),
+        GoRoute(
+          path: "/settings",
+          pageBuilder: (context, state) => MaterialPage(
+            key: state.pageKey,
+            child: const OtherView(initialIndex: 1),
           ),
           routes: [
             GoRoute(

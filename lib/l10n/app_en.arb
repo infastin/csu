@@ -33,6 +33,7 @@
   "thirdPartyLicenses": "Third-Party Licenses",
   "sourceCode": "Source Code",
   "groupNotSelected": "Group not selected",
+  "goToSettings": "Go to settings",
   "grpcOk": "OK",
   "grpcCancelled": "Request cancelled",
   "grpcUnknown": "Unknown error",

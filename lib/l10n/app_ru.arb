@@ -33,6 +33,7 @@
   "thirdPartyLicenses": "Сторонние лицензии",
   "sourceCode": "Исходный код",
   "groupNotSelected": "Группа не выбрана",
+  "goToSettings": "Перейти в настройки",
   "grpcOk": "ОК",
   "grpcCancelled": "Запрос отменен",
   "grpcUnknown": "Неизвестная ошибка",

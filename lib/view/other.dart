@@ -8,6 +8,7 @@ import 'package:url_launcher/url_launcher_string.dart';
 
 import '../widgets/widgets.dart';
 import '../repo/repo.dart';
+import 'no_data_body.dart';
 
 part 'settings.dart';
 part 'timetable.dart';
@@ -15,7 +16,12 @@ part 'about.dart';
 part 'license.dart';
 
 class OtherView extends StatefulWidget {
-  const OtherView({super.key});
+  const OtherView({
+    super.key,
+    this.initialIndex = 0,
+  });
+
+  final int initialIndex;
 
   @override
   State<OtherView> createState() => _OtherViewState();
@@ -27,7 +33,12 @@ class _OtherViewState extends State<OtherView> with TickerProviderStateMixin {
   @override
   void initState() {
     super.initState();
-    _tabController = TabController(length: 2, vsync: this);
+
+    _tabController = TabController(
+      length: 2,
+      vsync: this,
+      initialIndex: widget.initialIndex
+    );
   }
 
   @override

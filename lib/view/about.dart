@@ -32,7 +32,7 @@ class _AboutBody extends StatelessWidget {
           title: Text(loc.license),
           subtitle: Text(appInfo.appLicenseName),
           leading: const Icon(Icons.description),
-          onTap: () => GoRouter.of(context).go("/other/about/license"),
+          onTap: () => GoRouter.of(context).go("/settings/about/license"),
         ),
         ListTile(
           title: Text(loc.thirdPartyLicenses),

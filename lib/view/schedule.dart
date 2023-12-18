@@ -5,6 +5,8 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../widgets/widgets.dart';
 import '../utils/utils.dart';
 import '../repo/repo.dart';
+import 'no_data_body.dart';
+import 'no_group_body.dart';
 
 class ScheduleView extends StatelessWidget {
   const ScheduleView({super.key});
@@ -53,14 +55,18 @@ class _ScheduleBody extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final cache = Provider.of<CacheProvider>(context);
+    final prefs = Provider.of<PreferencesProvider>(context);
+    final loc = AppLocalizations.of(context)!;
 
     updateSchedule(context, false);
 
     late final Widget body;
-    if (cache.schedule != null && cache.schedule!.isNotEmpty) {
-      body = const _ScheduleBodyList();
+    if (prefs.group.isEmpty) {
+      body = const NoGroupBody();
+    } else if (cache.schedule == null || cache.schedule!.isEmpty) {
+      body = NoDataBody(message: loc.noSchedule);
     } else {
-      body = const _ScheduleBodyNone();
+      body = const _ScheduleBodyList();
     }
 
     return RefreshIndicator(
@@ -139,35 +145,6 @@ class _ScheduleBodyListState extends State<_ScheduleBodyList> {
           child: DayWidget(day: days[index-1], startDate: startDate)
         );
       },
-    );
-  }
-}
-
-class _ScheduleBodyNone extends StatelessWidget {
-  const _ScheduleBodyNone({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    final theme = Theme.of(context);
-    final textTheme = theme.textTheme;
-    final colorScheme = theme.colorScheme;
-    final loc = AppLocalizations.of(context)!;
-
-    return CustomScrollView(
-      slivers: [
-        SliverFillRemaining(
-          child: Container(
-            alignment: Alignment.center,
-            padding: const EdgeInsets.all(8),
-            child: Text(
-              loc.noSchedule,
-              style: textTheme.titleLarge?.copyWith(
-                color: colorScheme.onBackground.withOpacity(0.7),
-              )
-            ),
-          )
-        )
-      ],
     );
   }
 }

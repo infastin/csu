@@ -4,6 +4,8 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../widgets/widgets.dart';
 import '../repo/repo.dart';
+import 'no_data_body.dart';
+import 'no_group_body.dart';
 
 class RetakesView extends StatelessWidget {
   const RetakesView({super.key});
@@ -52,14 +54,18 @@ class _RetakesBody extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final cache = Provider.of<CacheProvider>(context);
+    final prefs = Provider.of<PreferencesProvider>(context);
+    final loc = AppLocalizations.of(context)!;
 
     updateRetakes(context, false);
 
     late final Widget body;
-    if (cache.retakes != null && cache.retakes!.isNotEmpty) {
-      body = const _RetakesBodyList();
+    if (prefs.group.isEmpty) {
+      body = const NoGroupBody();
+    } else if (cache.retakes == null || cache.retakes!.isEmpty) {
+      body = NoDataBody(message: loc.noRetakes);
     } else {
-      body = const _RetakesBodyNone();
+      body = const _RetakesBodyList();
     }
 
     return RefreshIndicator(
@@ -82,35 +88,6 @@ class _RetakesBodyList extends StatelessWidget {
         padding: const EdgeInsets.all(8),
         child: RetakeWidget(retake: cache.retakes!.retakes[index]),
       )
-    );
-  }
-}
-
-class _RetakesBodyNone extends StatelessWidget {
-  const _RetakesBodyNone({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    final theme = Theme.of(context);
-    final textTheme = theme.textTheme;
-    final colorScheme = theme.colorScheme;
-    final loc = AppLocalizations.of(context)!;
-
-    return CustomScrollView(
-      slivers: [
-        SliverFillRemaining(
-          child: Container(
-            alignment: Alignment.center,
-            padding: const EdgeInsets.all(8),
-            child: Text(
-              loc.noRetakes,
-              style: textTheme.titleLarge?.copyWith(
-                color: colorScheme.onBackground.withOpacity(0.7),
-              )
-            ),
-          ),
-        ),
-      ],
     );
   }
 }

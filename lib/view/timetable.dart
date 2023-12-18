@@ -33,6 +33,7 @@ class _TimetableBody extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final cache = Provider.of<CacheProvider>(context);
+    final loc = AppLocalizations.of(context)!;
 
     updateTimeTable(context, false);
 
@@ -40,7 +41,7 @@ class _TimetableBody extends StatelessWidget {
     if (cache.timetable != null && cache.timetable!.isNotEmpty) {
       body = const _TimetableBodyList();
     } else {
-      body = const _TimetableBodyNone();
+      body = NoDataBody(message: loc.noTimeTable);
     }
 
     return RefreshIndicator(
@@ -88,35 +89,6 @@ class _TimetableBodyList extends StatelessWidget {
           ),
         ),
       ),
-    );
-  }
-}
-
-class _TimetableBodyNone extends StatelessWidget {
-  const _TimetableBodyNone({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    final theme = Theme.of(context);
-    final textTheme = theme.textTheme;
-    final colorScheme = theme.colorScheme;
-    final loc = AppLocalizations.of(context)!;
-
-    return CustomScrollView(
-      slivers: [
-        SliverFillRemaining(
-          child: Container(
-            alignment: Alignment.center,
-            padding: const EdgeInsets.all(8),
-            child: Text(
-              loc.noTimeTable,
-              style: textTheme.titleLarge?.copyWith(
-                color: colorScheme.onBackground.withOpacity(0.7),
-              )
-            ),
-          )
-        )
-      ],
     );
   }
 }

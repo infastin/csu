@@ -79,7 +79,7 @@ class _SettingsBody extends StatelessWidget {
             _SettingsTile(
               title: Text(loc.about),
               icon: const Icon(Icons.info),
-              onTap: () => GoRouter.of(context).go("/other/about"),
+              onTap: () => GoRouter.of(context).go("/settings/about"),
             ),
           ],
         ),
