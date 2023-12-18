@@ -1,4 +1,4 @@
-package com.example.csu
+package ru.csu.forstudents
 
 import io.flutter.embedding.android.FlutterActivity
 
