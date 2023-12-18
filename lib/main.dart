@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:adaptive_theme/adaptive_theme.dart';
+import 'package:intl/intl_standalone.dart';
 import 'package:provider/provider.dart';
 import 'package:system_theme/system_theme.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -124,6 +125,7 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
   await SystemTheme.accentColor.load();
+  await findSystemLocale();
   final savedThemeMode = await AdaptiveTheme.getThemeMode();
   final savedLocale = await Preferences.getLocale();
   final savedGroup = await Preferences.getGroup();
