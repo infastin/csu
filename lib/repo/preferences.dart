@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:intl/intl.dart';
@@ -8,7 +10,7 @@ class Preferences {
   static const String groupKey = "group";
 
   static Locale getDefaultLocale() {
-    var locale = Locale(Intl.shortLocale(Intl.getCurrentLocale()));
+    var locale = Locale(Intl.shortLocale(Intl.canonicalizedLocale(Platform.localeName)));
     if (!AppLocalizations.supportedLocales.contains(locale)) {
       locale = const Locale("en");
     }
