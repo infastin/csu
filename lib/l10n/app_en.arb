@@ -4,6 +4,7 @@
   "theme": "Theme",
   "other": "Other",
   "group": "Group",
+  "subgroup": "Subgroup",
   "systemTheme": "System",
   "lightTheme": "Light",
   "darkTheme": "Dark",

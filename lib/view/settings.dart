@@ -20,7 +20,7 @@ class _SettingsBody extends StatelessWidget {
   Widget build(BuildContext context) {
     final loc = AppLocalizations.of(context)!;
     final adaptiveTheme = AdaptiveTheme.of(context);
-    final prefProvider = Provider.of<PreferencesProvider>(context);
+    final prefs = Provider.of<PreferencesProvider>(context);
 
     final themesMap = {
       AdaptiveThemeMode.system: loc.systemTheme,
@@ -50,7 +50,7 @@ class _SettingsBody extends StatelessWidget {
             ),
             _SettingsTile(
               title: Text(loc.language),
-              subtitle: Text(languagesMap[prefProvider.locale]!),
+              subtitle: Text(languagesMap[prefs.locale]!),
               icon: const Icon(Icons.language),
               onTap: () => showDialog(
                 context: context,
@@ -64,13 +64,22 @@ class _SettingsBody extends StatelessWidget {
           children: [
             _SettingsTile(
               title: Text(loc.group),
-              subtitle: prefProvider.group.isNotEmpty ? Text(prefProvider.group) : null,
+              subtitle: prefs.group.isNotEmpty ? Text(prefs.group) : null,
               icon: const Icon(Icons.group),
               onTap: () => showDialog(
                 context: context,
                 builder: (BuildContext context) => const _GroupDialog()
               ),
-            )
+            ),
+            _SettingsTile(
+              title: Text(loc.subgroup),
+              subtitle: Text("${prefs.subgroup} ${loc.subgroup.toLowerCase()}"),
+              icon: const Icon(Icons.groups_3),
+              onTap: () => showDialog(
+                context: context,
+                builder: (BuildContext context) => const _SubgroupDialog()
+              ),
+            ),
           ]
         ),
         _SettingsSection(
@@ -183,7 +192,7 @@ class _LanguageDialog extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final loc = AppLocalizations.of(context)!;
-    final prefProvider = Provider.of<PreferencesProvider>(context);
+    final prefs = Provider.of<PreferencesProvider>(context);
 
     const locales = [
       ("English", Locale("en")),
@@ -197,12 +206,37 @@ class _LanguageDialog extends StatelessWidget {
           title: Text(locale.$1),
           leading: Radio<Locale>(
             value: locale.$2,
-            groupValue: prefProvider.locale,
-            onChanged: (Locale? _) => prefProvider.setLocale(locale.$2),
+            groupValue: prefs.locale,
+            onChanged: (_) => prefs.setLocale(locale.$2),
           ),
-          onTap: () => prefProvider.setLocale(locale.$2)
+          onTap: () => prefs.setLocale(locale.$2)
         )
       ]
+    );
+  }
+}
+
+class _SubgroupDialog extends StatelessWidget {
+  const _SubgroupDialog({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    final loc = AppLocalizations.of(context)!;
+    final prefs = Provider.of<PreferencesProvider>(context);
+
+    return SimpleDialog(
+      title: Text(loc.subgroup),
+      children: [
+        for (int i = 1; i <= 2; ++i) ListTile(
+          title: Text("${i} ${loc.subgroup.toLowerCase()}"),
+          leading: Radio<int>(
+            value: i,
+            groupValue: prefs.subgroup,
+            onChanged: (_) => prefs.setSubgroup(i),
+          ),
+          onTap: () => prefs.setSubgroup(i),
+        )
+      ],
     );
   }
 }

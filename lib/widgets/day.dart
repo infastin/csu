@@ -22,8 +22,8 @@ class DayWidget extends StatelessWidget {
     var theme = Theme.of(context);
     var textTheme = theme.textTheme;
     var date = startDate.add(Duration(days: day.weekday));
-    var prefProvider = Provider.of<PreferencesProvider>(context);
-    var dateFormat = DateFormat("EEEE, d MMM y", prefProvider.locale.toString());
+    var prefs = Provider.of<PreferencesProvider>(context);
+    var dateFormat = DateFormat("EEEE, d MMM y", prefs.locale.toString());
 
     var dateTheme = textTheme.titleMedium;
     if (DateTime.now().dateOnly() == date.dateOnly()) {
@@ -48,8 +48,9 @@ class DayWidget extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               for (int i = 0; i < day.subjects.length; ++i) ...[
-                i != 0 ? const Divider(height: 8, thickness: 0.5) : Container(),
-                Padding(
+                if (i != 0) const Divider(height: 8, thickness: 0.5),
+                if (day.subjects[i].subgroup == null
+                || day.subjects[i].subgroup == prefs.subgroup) Padding(
                   padding: const EdgeInsets.all(8),
                   child: SubjectWidget(subject: day.subjects[i])
                 )

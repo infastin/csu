@@ -324,6 +324,7 @@ class Subject extends $pb.GeneratedMessage {
     Lecturer? lecturer,
     $core.int? number,
     TimeRange? timeRange,
+    $core.int? subgroup,
   }) {
     final $result = create();
     if (name != null) {
@@ -344,6 +345,9 @@ class Subject extends $pb.GeneratedMessage {
     if (timeRange != null) {
       $result.timeRange = timeRange;
     }
+    if (subgroup != null) {
+      $result.subgroup = subgroup;
+    }
     return $result;
   }
   Subject._() : super();
@@ -357,6 +361,7 @@ class Subject extends $pb.GeneratedMessage {
     ..aOM<Lecturer>(4, _omitFieldNames ? '' : 'lecturer', subBuilder: Lecturer.create)
     ..a<$core.int>(5, _omitFieldNames ? '' : 'number', $pb.PbFieldType.O3)
     ..aOM<TimeRange>(6, _omitFieldNames ? '' : 'timeRange', protoName: 'timeRange', subBuilder: TimeRange.create)
+    ..a<$core.int>(7, _omitFieldNames ? '' : 'subgroup', $pb.PbFieldType.O3)
     ..hasRequiredFields = false
   ;
 
@@ -438,6 +443,15 @@ class Subject extends $pb.GeneratedMessage {
   void clearTimeRange() => clearField(6);
   @$pb.TagNumber(6)
   TimeRange ensureTimeRange() => $_ensure(5);
+
+  @$pb.TagNumber(7)
+  $core.int get subgroup => $_getIZ(6);
+  @$pb.TagNumber(7)
+  set subgroup($core.int v) { $_setSignedInt32(6, v); }
+  @$pb.TagNumber(7)
+  $core.bool hasSubgroup() => $_has(6);
+  @$pb.TagNumber(7)
+  void clearSubgroup() => clearField(7);
 }
 
 class Day extends $pb.GeneratedMessage {

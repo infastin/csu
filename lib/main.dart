@@ -129,6 +129,7 @@ void main() async {
   final savedThemeMode = await AdaptiveTheme.getThemeMode();
   final savedLocale = await Preferences.getLocale();
   final savedGroup = await Preferences.getGroup();
+  final savedSubgroup = await Preferences.getSubgroup();
   final packageInfo = await PackageInfo.fromPlatform();
   final schedule = await Cache.getSchedule();
   final retakes = await Cache.getRetakes();
@@ -139,6 +140,7 @@ void main() async {
     savedThemeMode: savedThemeMode,
     savedLocale: savedLocale,
     savedGroup: savedGroup,
+    savedSubgroup: savedSubgroup,
     packageInfo: packageInfo,
     schedule: schedule,
     retakes: retakes,
@@ -153,6 +155,7 @@ class App extends StatelessWidget {
     required this.savedThemeMode,
     required this.savedLocale,
     required this.savedGroup,
+    required this.savedSubgroup,
     required this.packageInfo,
     required this.schedule,
     required this.retakes,
@@ -162,7 +165,8 @@ class App extends StatelessWidget {
 
   final AdaptiveThemeMode? savedThemeMode;
   final Locale? savedLocale;
-  final String? savedGroup;
+  final String savedGroup;
+  final int savedSubgroup;
   final PackageInfo packageInfo;
   final ScheduleEntity? schedule;
   final RetakesEntity? retakes;
@@ -190,7 +194,8 @@ class App extends StatelessWidget {
             Provider(create: (_) => AppInfoProvider(packageInfo: packageInfo)),
             ChangeNotifierProvider(create: (_) => PreferencesProvider(
               locale: savedLocale ?? Preferences.getDefaultLocale(),
-              group: savedGroup ?? ""
+              group: savedGroup,
+              subgroup:savedSubgroup
             )),
             ChangeNotifierProvider(create: (_) => CacheProvider(
               schedule: schedule,

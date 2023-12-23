@@ -7,13 +7,18 @@ class PreferencesProvider extends ChangeNotifier {
   PreferencesProvider({
     required Locale locale,
     required String group,
-  }) : _locale = locale, _group = group;
+    required int subgroup,
+  }) : _locale = locale
+     , _group = group
+     , _subgroup = subgroup;
 
   Locale _locale;
   String _group;
+  int _subgroup;
 
   Locale get locale => _locale;
   String get group => _group;
+  int get subgroup => _subgroup;
 
   void setLocale(Locale locale) {
     if (!AppLocalizations.supportedLocales.contains(locale)) {
@@ -28,6 +33,12 @@ class PreferencesProvider extends ChangeNotifier {
   void setGroup(String group) {
     _group = group;
     Preferences.setGroup(group);
+    notifyListeners();
+  }
+
+  void setSubgroup(int subgroup) {
+    _subgroup = subgroup;
+    Preferences.setSubgroup(subgroup);
     notifyListeners();
   }
 }

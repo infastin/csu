@@ -91,6 +91,7 @@ const Subject$json = {
     {'1': 'lecturer', '3': 4, '4': 1, '5': 11, '6': '.schedule.Lecturer', '10': 'lecturer'},
     {'1': 'number', '3': 5, '4': 1, '5': 5, '10': 'number'},
     {'1': 'timeRange', '3': 6, '4': 1, '5': 11, '6': '.schedule.TimeRange', '10': 'timeRange'},
+    {'1': 'subgroup', '3': 7, '4': 1, '5': 5, '10': 'subgroup'},
   ],
   '4': [Subject_SubjectType$json],
 };
@@ -111,7 +112,8 @@ final $typed_data.Uint8List subjectDescriptor = $convert.base64Decode(
     'BlGAMgASgOMh0uc2NoZWR1bGUuU3ViamVjdC5TdWJqZWN0VHlwZVIEdHlwZRIuCghsZWN0dXJl'
     'chgEIAEoCzISLnNjaGVkdWxlLkxlY3R1cmVyUghsZWN0dXJlchIWCgZudW1iZXIYBSABKAVSBm'
     '51bWJlchIxCgl0aW1lUmFuZ2UYBiABKAsyEy5zY2hlZHVsZS5UaW1lUmFuZ2VSCXRpbWVSYW5n'
-    'ZSIxCgtTdWJqZWN0VHlwZRILCgdMRUNUVVJFEAASDAoIUFJBQ1RJQ0UQARIHCgNMQUIQAg==');
+    'ZRIaCghzdWJncm91cBgHIAEoBVIIc3ViZ3JvdXAiMQoLU3ViamVjdFR5cGUSCwoHTEVDVFVSRR'
+    'AAEgwKCFBSQUNUSUNFEAESBwoDTEFCEAI=');
 
 @$core.Deprecated('Use dayDescriptor instead')
 const Day$json = {

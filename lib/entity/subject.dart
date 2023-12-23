@@ -42,6 +42,7 @@ class SubjectEntity {
     required this.lecturer,
     required this.number,
     required this.timeRange,
+    this.subgroup,
   });
 
   factory SubjectEntity.fromPb(pb.Subject subject) {
@@ -52,6 +53,7 @@ class SubjectEntity {
       lecturer: LecturerEntity.fromPb(subject.lecturer),
       number: subject.number,
       timeRange: TimeRange.fromPb(subject.timeRange),
+      subgroup: subject.subgroup != 0 ? subject.subgroup : null,
     );
   }
 
@@ -63,6 +65,7 @@ class SubjectEntity {
   final LecturerEntity lecturer;
   final int number;
   final TimeRange timeRange;
+  final int? subgroup;
 
   Map<String, dynamic> toJson() => _$SubjectEntityToJson(this);
 }

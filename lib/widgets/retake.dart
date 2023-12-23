@@ -22,8 +22,8 @@ class RetakeWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final textTheme = theme.textTheme;
-    final prefProvider = Provider.of<PreferencesProvider>(context);
-    final dateFormat = DateFormat("EEEE, d MMM y", prefProvider.locale.toString());
+    final prefs = Provider.of<PreferencesProvider>(context);
+    final dateFormat = DateFormat("EEEE, d MMM y", prefs.locale.toString());
 
     var dateTheme = textTheme.titleMedium;
     if (DateTime.now().dateOnly() == retake.date.dateOnly()) {

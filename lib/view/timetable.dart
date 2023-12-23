@@ -68,7 +68,7 @@ class _TimetableBodyList extends StatelessWidget {
           child: Column(
             children: [
               for (var i = 0; i < cache.timetable!.timetable.length; ++i) ...[
-                i != 0 ? const Divider(height: 8, thickness: 0.5) : Container(),
+                if (i != 0) const Divider(height: 8, thickness: 0.5),
                 Padding(
                   padding: const EdgeInsets.all(8),
                   child: Row(

@@ -6,6 +6,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 class Preferences {
   static const String localeKey = "locale";
   static const String groupKey = "group";
+  static const String subgroupKey = "subgroup";
 
   static Locale getDefaultLocale() {
     var locale = Locale(Intl.shortLocale(Intl.getCurrentLocale()));
@@ -44,14 +45,24 @@ class Preferences {
     try {
       final prefs = await SharedPreferences.getInstance();
       final group = prefs.getString(groupKey);
-
-      if (group == null) {
-        return "";
-      }
-
-      return group;
+      return group ?? "";
     } catch (_) {
       return "";
+    }
+  }
+
+  static Future<bool> setSubgroup(int subgroup) async {
+    final prefs = await SharedPreferences.getInstance();
+    return prefs.setInt(subgroupKey, subgroup);
+  }
+
+  static Future<int> getSubgroup() async {
+    try {
+      final prefs = await SharedPreferences.getInstance();
+      final subgroup = prefs.getInt(subgroupKey);
+      return subgroup ?? 1;
+    } catch (_) {
+      return 1;
     }
   }
 }
