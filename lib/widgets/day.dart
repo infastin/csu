@@ -44,18 +44,21 @@ class DayWidget extends StatelessWidget {
           )
         ),
         Card(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              for (int i = 0; i < day.subjects.length; ++i) ...[
-                if (i != 0) const Divider(height: 8, thickness: 0.5),
-                if (day.subjects[i].subgroup == null
-                || day.subjects[i].subgroup == prefs.subgroup) Padding(
-                  padding: const EdgeInsets.all(8),
-                  child: SubjectWidget(subject: day.subjects[i])
-                )
+          child: SizedBox(
+            width: double.infinity,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                for (int i = 0; i < day.subjects.length; ++i) ...[
+                  if (i != 0) const Divider(height: 8, thickness: 0.5),
+                  if (day.subjects[i].subgroup == null
+                  || day.subjects[i].subgroup == prefs.subgroup) Padding(
+                    padding: const EdgeInsets.all(8),
+                    child: SubjectWidget(subject: day.subjects[i])
+                  )
+                ]
               ]
-            ]
+            )
           )
         )
       ],

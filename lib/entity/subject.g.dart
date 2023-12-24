@@ -15,6 +15,7 @@ SubjectEntity _$SubjectEntityFromJson(Map<String, dynamic> json) =>
           LecturerEntity.fromJson(json['lecturer'] as Map<String, dynamic>),
       number: json['number'] as int,
       timeRange: TimeRange.fromJson(json['timeRange'] as Map<String, dynamic>),
+      subgroup: json['subgroup'] as int?,
     );
 
 Map<String, dynamic> _$SubjectEntityToJson(SubjectEntity instance) =>
@@ -25,6 +26,7 @@ Map<String, dynamic> _$SubjectEntityToJson(SubjectEntity instance) =>
       'lecturer': instance.lecturer,
       'number': instance.number,
       'timeRange': instance.timeRange,
+      'subgroup': instance.subgroup,
     };
 
 const _$SubjectTypeEnumMap = {

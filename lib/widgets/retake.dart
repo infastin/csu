@@ -26,7 +26,7 @@ class RetakeWidget extends StatelessWidget {
     final dateFormat = DateFormat("EEEE, d MMM y", prefs.locale.toString());
 
     var dateTheme = textTheme.titleMedium;
-    if (DateTime.now().dateOnly() == retake.date.dateOnly()) {
+    if (DateTime.now().dateOnly() == retake.dateTime.dateOnly()) {
       dateTheme = dateTheme?.copyWith(
         color: theme.colorScheme.primary,
         fontWeight: FontWeight.bold,
@@ -39,7 +39,7 @@ class RetakeWidget extends StatelessWidget {
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
           child: Text(
-            dateFormat.format(retake.date).capitalize(),
+            dateFormat.format(retake.dateTime).capitalize(),
             style: dateTheme,
           )
         ),
@@ -67,9 +67,11 @@ class _RetakeBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final prefs = Provider.of<PreferencesProvider>(context);
     final theme = Theme.of(context);
     final textTheme = theme.textTheme;
     final colorScheme = theme.colorScheme;
+    final timeFormat = DateFormat("Hm", prefs.locale.toString());
 
     var room = retake.room;
     Uri? uri;
@@ -90,14 +92,7 @@ class _RetakeBody extends StatelessWidget {
           crossAxisAlignment: WrapCrossAlignment.center,
           children: [
             Text(
-              "#${retake.number}",
-              style: textTheme.labelMedium?.copyWith(
-                color: colorScheme.onSurface.withOpacity(0.7),
-              ),
-            ),
-            const Dot(width: 12),
-            Text(
-              retake.timeRange.format(context),
+              timeFormat.format(retake.dateTime),
               style: textTheme.labelLarge,
             ),
             const Dot(width: 12),

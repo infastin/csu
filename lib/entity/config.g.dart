@@ -6,4 +6,4 @@ part of 'config.dart';
 // LiteralEmbeddingGenerator
 // **************************************************************************
 
-const _$appConfig = (grpcHost: "192.168.0.105", grpcPort: 3000);
+const _$appConfig = (grpcHost: "0.0.0.0", grpcPort: 3000);

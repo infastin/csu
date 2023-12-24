@@ -13,9 +13,7 @@ class RetakeEntity {
     required this.name,
     required this.room,
     required this.lecturer,
-    required this.number,
-    required this.timeRange,
-    required this.date,
+    required this.dateTime,
   });
 
   factory RetakeEntity.fromPb(pb.Retake retake) {
@@ -23,9 +21,7 @@ class RetakeEntity {
       name: retake.name,
       room: retake.room,
       lecturer: LecturerEntity.fromPb(retake.lecturer),
-      number: retake.number,
-      timeRange: TimeRange.fromPb(retake.timeRange),
-      date: retake.date.toDateTime()
+      dateTime: retake.dateTime.toDateTime()
     );
   }
 
@@ -34,9 +30,7 @@ class RetakeEntity {
   final String name;
   final String room;
   final LecturerEntity lecturer;
-  final int number;
-  final TimeRange timeRange;
-  final DateTime date;
+  final DateTime dateTime;
 
   Map<String, dynamic> toJson() => _$RetakeEntityToJson(this);
 }

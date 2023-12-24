@@ -75,9 +75,7 @@ message Retake {
                   string    name      = 1;
                   string    room      = 2;
                   Lecturer  lecturer  = 3;
-                  int32     number    = 4;
-                  TimeRange timeRange = 5;
-  google.protobuf.Timestamp date      = 6;
+  google.protobuf.Timestamp dateTime  = 4;
 }
 
 message RetakesRequest {

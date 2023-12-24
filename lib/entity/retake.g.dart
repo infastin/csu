@@ -11,9 +11,7 @@ RetakeEntity _$RetakeEntityFromJson(Map<String, dynamic> json) => RetakeEntity(
       room: json['room'] as String,
       lecturer:
           LecturerEntity.fromJson(json['lecturer'] as Map<String, dynamic>),
-      number: json['number'] as int,
-      timeRange: TimeRange.fromJson(json['timeRange'] as Map<String, dynamic>),
-      date: DateTime.parse(json['date'] as String),
+      dateTime: DateTime.parse(json['dateTime'] as String),
     );
 
 Map<String, dynamic> _$RetakeEntityToJson(RetakeEntity instance) =>
@@ -21,7 +19,5 @@ Map<String, dynamic> _$RetakeEntityToJson(RetakeEntity instance) =>
       'name': instance.name,
       'room': instance.room,
       'lecturer': instance.lecturer,
-      'number': instance.number,
-      'timeRange': instance.timeRange,
-      'date': instance.date.toIso8601String(),
+      'dateTime': instance.dateTime.toIso8601String(),
     };

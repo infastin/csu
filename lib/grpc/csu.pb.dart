@@ -619,9 +619,7 @@ class Retake extends $pb.GeneratedMessage {
     $core.String? name,
     $core.String? room,
     Lecturer? lecturer,
-    $core.int? number,
-    TimeRange? timeRange,
-    $2.Timestamp? date,
+    $2.Timestamp? dateTime,
   }) {
     final $result = create();
     if (name != null) {
@@ -633,14 +631,8 @@ class Retake extends $pb.GeneratedMessage {
     if (lecturer != null) {
       $result.lecturer = lecturer;
     }
-    if (number != null) {
-      $result.number = number;
-    }
-    if (timeRange != null) {
-      $result.timeRange = timeRange;
-    }
-    if (date != null) {
-      $result.date = date;
+    if (dateTime != null) {
+      $result.dateTime = dateTime;
     }
     return $result;
   }
@@ -652,9 +644,7 @@ class Retake extends $pb.GeneratedMessage {
     ..aOS(1, _omitFieldNames ? '' : 'name')
     ..aOS(2, _omitFieldNames ? '' : 'room')
     ..aOM<Lecturer>(3, _omitFieldNames ? '' : 'lecturer', subBuilder: Lecturer.create)
-    ..a<$core.int>(4, _omitFieldNames ? '' : 'number', $pb.PbFieldType.O3)
-    ..aOM<TimeRange>(5, _omitFieldNames ? '' : 'timeRange', protoName: 'timeRange', subBuilder: TimeRange.create)
-    ..aOM<$2.Timestamp>(6, _omitFieldNames ? '' : 'date', subBuilder: $2.Timestamp.create)
+    ..aOM<$2.Timestamp>(4, _omitFieldNames ? '' : 'dateTime', protoName: 'dateTime', subBuilder: $2.Timestamp.create)
     ..hasRequiredFields = false
   ;
 
@@ -709,35 +699,15 @@ class Retake extends $pb.GeneratedMessage {
   Lecturer ensureLecturer() => $_ensure(2);
 
   @$pb.TagNumber(4)
-  $core.int get number => $_getIZ(3);
+  $2.Timestamp get dateTime => $_getN(3);
   @$pb.TagNumber(4)
-  set number($core.int v) { $_setSignedInt32(3, v); }
+  set dateTime($2.Timestamp v) { setField(4, v); }
   @$pb.TagNumber(4)
-  $core.bool hasNumber() => $_has(3);
+  $core.bool hasDateTime() => $_has(3);
   @$pb.TagNumber(4)
-  void clearNumber() => clearField(4);
-
-  @$pb.TagNumber(5)
-  TimeRange get timeRange => $_getN(4);
-  @$pb.TagNumber(5)
-  set timeRange(TimeRange v) { setField(5, v); }
-  @$pb.TagNumber(5)
-  $core.bool hasTimeRange() => $_has(4);
-  @$pb.TagNumber(5)
-  void clearTimeRange() => clearField(5);
-  @$pb.TagNumber(5)
-  TimeRange ensureTimeRange() => $_ensure(4);
-
-  @$pb.TagNumber(6)
-  $2.Timestamp get date => $_getN(5);
-  @$pb.TagNumber(6)
-  set date($2.Timestamp v) { setField(6, v); }
-  @$pb.TagNumber(6)
-  $core.bool hasDate() => $_has(5);
-  @$pb.TagNumber(6)
-  void clearDate() => clearField(6);
-  @$pb.TagNumber(6)
-  $2.Timestamp ensureDate() => $_ensure(5);
+  void clearDateTime() => clearField(4);
+  @$pb.TagNumber(4)
+  $2.Timestamp ensureDateTime() => $_ensure(3);
 }
 
 class RetakesRequest extends $pb.GeneratedMessage {

@@ -162,18 +162,15 @@ const Retake$json = {
     {'1': 'name', '3': 1, '4': 1, '5': 9, '10': 'name'},
     {'1': 'room', '3': 2, '4': 1, '5': 9, '10': 'room'},
     {'1': 'lecturer', '3': 3, '4': 1, '5': 11, '6': '.schedule.Lecturer', '10': 'lecturer'},
-    {'1': 'number', '3': 4, '4': 1, '5': 5, '10': 'number'},
-    {'1': 'timeRange', '3': 5, '4': 1, '5': 11, '6': '.schedule.TimeRange', '10': 'timeRange'},
-    {'1': 'date', '3': 6, '4': 1, '5': 11, '6': '.google.protobuf.Timestamp', '10': 'date'},
+    {'1': 'dateTime', '3': 4, '4': 1, '5': 11, '6': '.google.protobuf.Timestamp', '10': 'dateTime'},
   ],
 };
 
 /// Descriptor for `Retake`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List retakeDescriptor = $convert.base64Decode(
     'CgZSZXRha2USEgoEbmFtZRgBIAEoCVIEbmFtZRISCgRyb29tGAIgASgJUgRyb29tEi4KCGxlY3'
-    'R1cmVyGAMgASgLMhIuc2NoZWR1bGUuTGVjdHVyZXJSCGxlY3R1cmVyEhYKBm51bWJlchgEIAEo'
-    'BVIGbnVtYmVyEjEKCXRpbWVSYW5nZRgFIAEoCzITLnNjaGVkdWxlLlRpbWVSYW5nZVIJdGltZV'
-    'JhbmdlEi4KBGRhdGUYBiABKAsyGi5nb29nbGUucHJvdG9idWYuVGltZXN0YW1wUgRkYXRl');
+    'R1cmVyGAMgASgLMhIuc2NoZWR1bGUuTGVjdHVyZXJSCGxlY3R1cmVyEjYKCGRhdGVUaW1lGAQg'
+    'ASgLMhouZ29vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcFIIZGF0ZVRpbWU=');
 
 @$core.Deprecated('Use retakesRequestDescriptor instead')
 const RetakesRequest$json = {
